@@ -1,11 +1,6 @@
-//4- Recoge el alto y el ancho de una tabla mediante prompt. Escribe en el body (document.write()) 
-//una tabla de esas medidas, que muestre los números desde el 1 hasta el número de celdas.
-//Por ejemplo, para las entradas: alto 2, ancho 5.
-//El programa debe escribir en la página:
-//1	  2	  3	  4	  5
-//6	  7	  8	  9	  10
-
-//Ayuda: document.write("<table>");
+//6-Modifica el ejercicio 2 para que además de las medidas, pida un colspan. 
+//A partir de la segunda fila deberá unir las celdas según pidan los parámetros, si el ancho no es divisible por el colspan, 
+//se deben dejar tantas celdas sin colspan como se necesiten.
 
 var alto = prompt("Introduce el ALTO de la tabla");
 var ancho = prompt("Introduce el ANCHO de la tabla");
