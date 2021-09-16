@@ -1,8 +1,8 @@
+//1-Recoge una cadena mediante prompt y comprueba si es un palíndromo, muestra un alert con el resultado.
+
 var palabra = prompt("Escriba una palabra");
 var palabraInvertida = "";
-//for (let i = 0; i < palabra.length; i++) {
-//    palabraInvertida[i] = palabra[length-i-1]
-//}
+
 
 palabraInvertida = reverse(palabra);
 
