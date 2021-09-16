@@ -9,22 +9,17 @@
 
 var alto = prompt("Introduce el ALTO de la tabla");
 var ancho = prompt("Introduce el ANCHO de la tabla");
+var contador = 1;
 
-var tabla = document.createElement("table");
-var tblBody = document.createElement("tbody");
+document.write("<table border>");
 for (let i = 0; i < alto; i++) { //Generacion de la altura de la tabla
-    var fila = document.createElement("tr");
+    document.write("<tr>");
     for (let j = 0; j < ancho; j++) {
-        var celda = document.createElement("td")
-        var textoCelda = document.createTextNode((i+1)*(j+1));
-        celda.appendChild(textoCelda);
-        fila.appendChild(celda);        
+        document.write("<td>" + contador + "</td>");
+        contador++;
     }
-    tblBody.appendChild(fila);
+    document.write("</tr>");
 }
-tabla.appendChild(tblBody);
-
-document.write(tabla);
-
+document.write("</table>");
 
 
