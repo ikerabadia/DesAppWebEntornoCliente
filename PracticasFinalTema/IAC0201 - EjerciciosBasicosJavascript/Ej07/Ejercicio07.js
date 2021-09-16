@@ -4,10 +4,31 @@
 
 var numeroCampos = prompt("Introduce el numero de campos que tendra el formulario");
 
+for (let i = 0; i < numeroCampos; i++) {
+    GenerarCampos();    
+}
 
 
-var tipo = prompt("Introduce el tipo del campo: 1-texto, 2-password, 3-boton");
-var colspan = prompt("Introduce el COLSPAN para las columnas");
+function GenerarCampos() {
+    var tipoCampo = prompt("Introduzca el tipo de campo: 1-texto, 2-password, 3-boton");
 
+    switch (parseInt(tipoCampo)) {
+        case 1:
+            var nombreCampo = prompt("Introduzca el nombre del campo");
+            var valorPorDefecto = prompt("Introduzca el valor que tendra por defecto el campo");
+            document.write("<input type=\"text\" name = \"" + nombreCampo + "\" placeholder=\"" + valorPorDefecto + "\"><br>");
+            break;
+        case 2:
+            var nombreCampo = prompt("Introduzca el nombre del campo");
+            var valorPorDefecto = prompt("Introduzca el valor que tendra por defecto el campo");
+            document.write("<input type=\"password\" name = \"" + nombreCampo + "\" placeholder=\"" + valorPorDefecto + "\"><br>");
+            break;
+        case 3:
+            var nombreCampo = prompt("Introduzca el nombre del boton");
+            var valorPorDefecto = prompt("Introduzca el valor del boton");
+            document.write("<button>" + valorPorDefecto + "</button><br>");
+            break;
+    }
+}
 
 
