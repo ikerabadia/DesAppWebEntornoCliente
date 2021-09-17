@@ -14,21 +14,31 @@ function GenerarCampos() {
 
     switch (parseInt(tipoCampo)) {
         case 1:
-            var nombreCampo = prompt("Introduzca el nombre del campo");
-            var valorPorDefecto = prompt("Introduzca el valor que tendra por defecto el campo");
-            document.write("<input type=\"text\" name = \"" + nombreCampo + "\" placeholder=\"" + valorPorDefecto + "\"><br>");
+            generarCampoTexto();
             break;
         case 2:
-            var nombreCampo = prompt("Introduzca el nombre del campo");
-            var valorPorDefecto = prompt("Introduzca el valor que tendra por defecto el campo");
-            document.write("<input type=\"password\" name = \"" + nombreCampo + "\" placeholder=\"" + valorPorDefecto + "\"><br>");
+            generarCampoPassword();
             break;
         case 3:
-            var nombreCampo = prompt("Introduzca el nombre del boton");
-            var valorPorDefecto = prompt("Introduzca el valor del boton");
-            document.write("<button>" + valorPorDefecto + "</button><br>");
+            generarCampoBoton();
             break;
     }
 }
+function generarCampoTexto() {
+    var nombreCampo = prompt("Introduzca el nombre del campo");
+    var valorPorDefecto = prompt("Introduzca el valor que tendra por defecto el campo");
+    document.write("<input type=\"text\" name = \"" + nombreCampo + "\" placeholder=\"" + valorPorDefecto + "\"><br>");
+}
 
+function generarCampoPassword() {
+    var nombreCampo = prompt("Introduzca el nombre del campo");
+    var valorPorDefecto = prompt("Introduzca el valor que tendra por defecto el campo");
+    document.write("<input type=\"password\" name = \"" + nombreCampo + "\" placeholder=\"" + valorPorDefecto + "\"><br>");
+}
+
+function generarCampoBoton() {
+    var nombreCampo = prompt("Introduzca el nombre del boton");
+    var valorPorDefecto = prompt("Introduzca el valor del boton");
+    document.write("<button>" + valorPorDefecto + "</button><br>");
+}
 

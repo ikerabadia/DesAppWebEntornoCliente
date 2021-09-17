@@ -1,6 +1,5 @@
-//7-Crea un formulario de manera dinámica. Cada vez que se entre en la web se pedirá mediante promt el número de campos 
-//que debe tener el formulario, y para cada uno de ellos el tipo (Texto, password o botón), el nombre y el valor por defecto. 
-//Seguidamente se creará un formulario plenamente funcional con los parámetros indicados.
+//8-Modifica el ejercicio anterior para poder pintar también campos de tipo texto, password, boton, select, radio y checkbox, 
+//pidiendo más o menos datos en función de cada tipo de botón.
 
 var numeroCampos = prompt("Introduce el numero de campos que tendra el formulario");
 
