@@ -42,8 +42,10 @@ function obtieneCombinaciones(palabra) {
 }
 
 //EJERCICIO 03
-document.write("<h2>Ejercicio01 - Ordenar cadena alfabeticamente</h2>");
+document.write("<h2>Ejercicio03 - Ordenar cadena alfabeticamente</h2>");
 document.write("<pre>Palabra 1 -> pepe | Ordenada -> " + ordenarCadena("pepe") + "</pre>");
+document.write("<pre>Palabra 2 -> palabra | Ordenada -> " + ordenarCadena("palabra") + "</pre>");
+document.write("<pre>Palabra 1 -> huevo | Ordenada -> " + ordenarCadena("huevo") + "</pre>");
 
 
 function ordenarCadena(palabra) {
