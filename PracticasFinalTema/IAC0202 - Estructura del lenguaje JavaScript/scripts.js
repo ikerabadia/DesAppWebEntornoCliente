@@ -114,8 +114,8 @@ document.write("<pre>Cantidad 1 -> 100 - Grupos -> 30 3 <br> RESULTADO <br>");
 getGruposMonedas(100, ordenarArrayNumeros("30 3")).forEach(element => {
     document.write("<pre> Monedas de " + element[0] + " -> " + element[1] + " </pre>");
 });
-document.write("<pre>Cantidad 1 -> 1500 - Grupos -> 1000 200 45 20 3 1 <br> RESULTADO <br>");
-getGruposMonedas(1500, ordenarArrayNumeros("1000 200 45 20 3 1")).forEach(element => {
+document.write("<pre>Cantidad 1 -> 1500 - Grupos -> 1000 200 45 20 5 3 2 1 <br> RESULTADO <br>");
+getGruposMonedas(1500, ordenarArrayNumeros("1000 200 45 20 5 3 2 1")).forEach(element => {
     document.write("<pre> Monedas de " + element[0] + " -> " + element[1] + " </pre>");
 });
 
@@ -149,4 +149,41 @@ function ordenarArrayNumeros(gruposMonedas) {
 }
 
 //EJERCICIO 08
+document.write("<h2>Ejercicio08 - Obtención de carácteres únicos en una cadena</h2>");
+document.write("<pre>Cadena 1 -> Hola pepe que tal estás - Caracteres unicos en la cadena -> " + getCaracteresUnicos("Hola pepe que tal estás") + " <br>");
+document.write("<pre>Cadena 1 -> Buenos Bombos - Caracteres unicos en la cadena -> " + getCaracteresUnicos("Buenos Bombos") + " <br>");
+document.write("<pre>Cadena 1 -> Buenos Bombos - El músculo con el nombre mas largo es el esternocleidomastoideo. -> " + getCaracteresUnicos("El músculo con el nombre mas largo es el esternocleidomastoideo.") + " <br>");
 
+
+function getCaracteresUnicos(cadena) {
+    caracteresSeparados = cadena.split("");
+    caracteresUnicos = [];
+
+    caracteresSeparados.forEach(element => {
+        if (!caracteresUnicos.includes(element)) {
+            caracteresUnicos.push(element);  
+        }
+    });
+    return caracteresUnicos.toString();
+}
+
+//EJERCICIO 09
+document.write("<h2>Ejercicio08 - Obtención de carácteres únicos en una cadena</h2>");
+document.write("<pre>Palabra 1 -> 10 letras | Resultado -> " + generaCadenaAleatoria(10) + " <br>");
+document.write("<pre>Palabra 1 -> 25 letras | Resultado -> " + generaCadenaAleatoria(25) + " <br>");
+document.write("<pre>Palabra 1 -> 50 letras | Resultado -> " + generaCadenaAleatoria(50) + " <br>");
+
+
+function generaCadenaAleatoria(longitudCadena) {
+    caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    arrayCaracteres = caracteres.split("");
+    cadenaRandom = "";
+     for (let i = 0; i < longitudCadena; i++) {
+         cadenaRandom = cadenaRandom + arrayCaracteres[randomNumber(0,arrayCaracteres.length-1)];         
+     }
+     return cadenaRandom;
+}
+
+function randomNumber(min, max) {
+    return Math.floor((Math.random() * (max - min + 1)) + min);
+}
