@@ -11,7 +11,9 @@ document.write("Cadena inicial: 'Hola que tal' <br> Cadena especificada: 'hola q
 
 function comienzaCon(cadena1, cadena2) {
     
-    if (cadena1.substring(cadena2.lenght) == cadena2) {
+    var aux = cadena1.substring(0, cadena2.length);
+
+    if ( aux == cadena2) {
         return true;
     }else{
         return false;
