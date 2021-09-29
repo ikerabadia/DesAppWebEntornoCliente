@@ -1,4 +1,4 @@
-//4. Escriba una función de JavaScript para comprobar si una cadena termina con una cadena especificada.
+//6. Escribe una función JavaScript para obtener el sucesor de una cadena.
 
 var cadena = prompt("Introduzca una cadena y le daremos el sucesor a la misma.");
 document.write("Cadena introducida: " + cadena + "<br>");

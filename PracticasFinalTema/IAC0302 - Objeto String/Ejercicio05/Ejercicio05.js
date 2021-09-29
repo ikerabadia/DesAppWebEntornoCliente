@@ -1,4 +1,4 @@
-//4. Escriba una función de JavaScript para comprobar si una cadena termina con una cadena especificada.
+//5. Escribe una función JavaScript para comprobar si una cadena termina con una cadena especificada.
 
 var cadena1 = "Hola que tal";
 var cadena2 = "ue tal";
