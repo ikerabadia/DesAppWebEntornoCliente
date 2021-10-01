@@ -1,12 +1,47 @@
 <!DOCTYPE html>
+<script src="scripts.js"></script>
 <html lang="es">
   <head>
     <title>Titulo de la web| Menos de 55 caracteres</title>
     <meta charset="utf-8" />
-    <link rel="script" href="scripts.js"></link>
+    <link rel="script" href="./scripts.js"></link>
   </head>
 
   <body>
-    <script src="./scripts.js"></script>
+    <h2>Imprimir pagina</h2>
+    <p>Click en este boton para imprimir esta pagina</p>
+    <button onclick="imprimirPagina()">Imprimir pagina</button>
+
+    <h2>Comprobar datos de pagina</h2>
+    <p>El primer boton abre una ventana nueva y el segundo la cierra, con el tercero 
+      puedes saber si la ventana esta abierta o cerrada.
+    </p>
+    <button onclick="openWin()">Open myWindow</button>
+    <button onclick="closeWin()">Close myWindow</button>
+    <button onclick="checkWin()">Is myWindow open?</button>
+
+    <br><br>
+    <div id="msg"></div>
+
+    <h2>Scrollear pagina</h2>
+    <p>Click en este boton para scrollear la pagina 10px hacia abajo</p>
+    <input type="button" onclick="scrollWindow()" value="Scroll" />
+
+    <h2>Tamaño de la pantalla</h2>
+    <p>Click en el boton a continuacion para saber el tamaño en pixeles de su pantalla (no de su ventana)</p>
+    <button onclick="sizePantalla()">size</button>
+    <p id="width"></p>
+    <p id="height"></p>
+
+    <h2>Hostname</h2>
+    <p>Click en el siguiente boton para conocer el hostname </p>
+    <button onclick="getHostname()">hostname</button>
+    <p id="hostname"></p>
+
+    <h2>Numero de paginas en historial</h2>
+    <p>Click en el siguiente boton para saber el numero de paginas que hay en el historial </p>
+    <button onclick="pagesOnHistory()">Numero de paginas</button>
+    <p id="numberPages"></p>
+
   </body>
 </html>
