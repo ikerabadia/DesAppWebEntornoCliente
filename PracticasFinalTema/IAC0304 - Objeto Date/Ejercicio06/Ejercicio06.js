@@ -17,9 +17,6 @@ document.write(
 
 function addWeeks(fecha, semanas) {
   var fechaInicial = new Date(fecha);
-  //var fechaAñadir = new Date(semanas*7*24*60*60*1000);
-  //var fechaFinal = fechaInicial + fechaAñadir;
-  //return fechaFinal;
   return sumarDias(fechaInicial, semanas*7);
 }
 function sumarDias(fecha, dias){
