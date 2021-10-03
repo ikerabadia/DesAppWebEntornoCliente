@@ -1,4 +1,4 @@
-//2. Escribe una función JavaScript para obtener el número de días de un mes.
+//4. Escribe una función JavaScript para obtener la fecha mínima de un array de fechas.
 document.write("Fechas: ['2015/02/01', '2015/02/02', '2015/01/03'] -> Fecha minima: " + getFechaMenor(['2015/02/01', '2015/02/02', '2015/01/03']) + "<br>");
 
 function getFechaMenor(arrayFechas) {
