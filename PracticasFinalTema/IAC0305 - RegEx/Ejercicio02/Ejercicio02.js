@@ -5,5 +5,5 @@ document.write("Cadena Introducida: ** Comentario2 ** | Resultado: " +  ejercici
 document.write("Cadena Introducida: ** Comentario2** | Resultado: " + ejercicio2("** Comentario2**")+ "<br>");
 
 function ejercicio2(cadena){
-    return /^\* \w*\n/.test(cadena)||/^\*\* \w* \*\*$/.test(cadena);
+    return /(^(\*\* ).*( \*\*)$)|(^(\* ).*(\n)$)/.test(cadena);
 }
