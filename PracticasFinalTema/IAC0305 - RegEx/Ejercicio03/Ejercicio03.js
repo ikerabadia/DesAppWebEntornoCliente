@@ -13,5 +13,5 @@ document.write("Cadena Introducida: \"ini123FI\" | Resultado: " +  ejercicio3("*
 document.write("Cadena Introducida: \"ini12A3FIN\" | Resultado: " + ejercicio3("** Comentario2**")+ "<br>");
 
 function ejercicio3(cadena){
-    return /^ini[0-9]*fin$/i.test(cadena);
+    return /^ini[^a-z,\n]*fin$/i.test(cadena);
 }

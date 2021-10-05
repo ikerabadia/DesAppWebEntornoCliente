@@ -9,3 +9,5 @@ document.write("Cadena Introducida: \"101***\" | Resultado: " + ejercicio4("** C
 function ejercicio4(cadena){
     return (/^[0,1,*]{0,}$/.test(cadena) && !/\*{3,}*/.test(cadena));
 }
+
+//EXPRESION ADECUADA   ^(?! \*{3,})[01*]+$   no es seguro que esta funcione
