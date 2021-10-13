@@ -5,6 +5,9 @@ window.onload = function () {
     nombreMeses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
     //Lo mismo que los meses pero con los dias de la semana
     diasSemana = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+    //Array que almacenara las citas
+    citas = [];
+    nombresCitas = [];
 
     //Datos de la fecha actual
     fecha = new Date();
@@ -15,17 +18,20 @@ window.onload = function () {
 
     //Establezco la fecha actual en la parte de abajo del calendario
     pieCalendario = document.getElementById("fechaActual");
-    pieCalendario.innerHTML += diasSemana[diaSemana] + ", " + diaHoy + " de " + nombreMeses[mesHoy] + " de " + añoHoy;
+    pieCalendario.innerHTML += diasSemana[diaSemana] + ", " + diaHoy + " de " + nombreMeses[mesHoy] + " de " + añoHoy + "<div id=\"horaMostrada\"></div>";
+
+    //Inicio el pintado continuo de la hora
+    pintarHora()
 
     //Establezco como globales los datos del mes y el año que se estan mostrando
     mesMostrado = fecha.getMonth();
     añoMostrado = fecha.getFullYear();
 
-    //Pinto la cabecera
+    //Establezco los valores del buscador con los valores actuales de mes y año definidos anteriormente
+    document.getElementById("buscadorAño").value = añoMostrado;
+
     cabecera();
-    //Pinto los dias de la semana en la tabla
     cabeceraTabla();
-    //Por ultimo pinto los dias del mes en los demas espacios de la tabla
     pintarDias();
 }
 
@@ -89,7 +95,11 @@ function pintarDias() {
             var mesActual = diaMes.getMonth();
             var añoActual = diaMes.getFullYear();
             var celda = fila.getElementsByTagName("td")[j];
-            celda.innerHTML = diaActual; //Pinto el numero del dia en la celda
+            if (mesActual == mesMostrado) { //Solo voy a meter el metodo de datosCita en los dias del mes mostrado
+                celda.innerHTML = "<a onClick=\"datosCita("+ diaActual +")\">"+diaActual+"</a>";
+            }else{
+                celda.innerHTML = "<p>"+diaActual+"</p>"; //Pinto el numero del dia en la celda
+            }            
 
             //Recuperar estado inicial al cambiar de mes:
             celda.style.backgroundColor = "#9bf5ff";
@@ -105,7 +115,7 @@ function pintarDias() {
             //destaco la fecha actual
             if (mesActual == mesHoy && diaActual == diaHoy && añoActual == añoHoy) {
                 celda.style.backgroundColor = "#f0b19e";
-                celda.innerHTML = "<cite title='Fecha Actual'>" + diaActual + "</cite>";
+                celda.innerHTML = "<a title='Fecha Actual' onClick=\"datosCita("+ diaActual +")\">" + diaActual + "</a>";
             }
             //Actualizo el diaActual al siguiente dia para la siguiente vuelta de bucle
             diaActual = diaActual+1;
@@ -131,9 +141,9 @@ function mesAntes() {
 //Funcion para el boton que carga el mes siguiente
 function mesDespues() {
     var nuevoMes = new Date();
-    var tiempounix = primerDiaMes.getTime(); //tiempo en milisegundos del primer dia del mes actual
-    tiempounix = tiempounix + 45 * 24 * 60 * 60 * 1000; //le añado 45 días para estar seguro de que paso al siguiente mes
-    nuevoMes.setTime(tiempounix); //convierto la fecha del mes actual + 45 dias de milisegundos a fecha
+    var tiempoMilis = primerDiaMes.getTime(); //tiempo en milisegundos del primer dia del mes actual
+    tiempoMilis = tiempoMilis + 45 * 24 * 60 * 60 * 1000; //le añado 45 días para estar seguro de que paso al siguiente mes
+    nuevoMes.setTime(tiempoMilis); //convierto la fecha del mes actual + 45 dias de milisegundos a fecha
     mesMostrado = nuevoMes.getMonth();
     añoMostrado = nuevoMes.getFullYear();
     cabecera();
@@ -150,5 +160,100 @@ function actualizar() {
 
 //Funcion para buscar una fecha concreta y mostrarla en pantalla
 function buscaFecha() {
-    
+    //Obtengo los objetos del html
+    var añoBuscar = document.getElementById("buscadorAño").value;
+    var listaMeses = document.buscar.buscaMes;
+    var opciones = listaMeses.options;
+    var indexMesLista = listaMeses.selectedIndex;
+    var mesBuscar = opciones[indexMesLista].value;
+
+    //Compruebo que el año esta bien introducido
+    if (isNaN(añoBuscar) || añoBuscar < 1) {
+        alert("El año no es válido:\n debe ser un número mayor que 0");
+    } else{
+        //Esta bien asi que establezco globales y pinto
+        nuevaFecha = new Date();
+        nuevaFecha.setMonth(mesBuscar);
+        nuevaFecha.setFullYear(añoBuscar);
+        añoMostrado = nuevaFecha.getFullYear();
+        mesMostrado = nuevaFecha.getMonth();
+        cabecera();
+        pintarDias();
+    }
+}
+
+function pintarHora() {
+    setInterval(
+
+        function(){
+            var fecha = new Date();
+            var cita = fecha.getFullYear() + " " + (fecha.getMonth()+1) + " " + fecha.getDate() + " " + fecha.getHours()+" "+fecha.getMinutes()+" "+fecha.getSeconds();
+            if(citas.includes(cita)){
+                suenaAlarma();
+            }
+            document.getElementById("horaMostrada").innerHTML=fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
+        },1000);
+}
+
+function datosCita(dia) {
+    //Establezco los datos del formulario de cita con los del dia clicado
+    document.getElementById("año").value = añoMostrado;
+    document.getElementById("mes").value = mesMostrado+1;
+    document.getElementById("dia").value = dia;
+
+    //pinto el titulo de la zona de mostrado de fechas
+    document.getElementById("tituloMostradorCitas").innerHTML = "Citas el " + dia + "/" + (mesMostrado+1) + "/" + añoMostrado;
+
+    //pinto las citas del dia seleccionado
+    pintarCitas(dia);
+
+
+}
+//Guardo la cita en un array y su nombre en otro, estan relacionados por la misma posicion en el array
+function guardarCita(){
+    var cita = document.getElementById("año").value + " " + 
+    document.getElementById("mes").value + " " +
+    document.getElementById("dia").value + " " + 
+    document.getElementById("hora").value + " " +
+    document.getElementById("minuto").value + " " +
+    document.getElementById("segundo").value;    
+    citas.push(cita);
+    var nombreCita = document.getElementById("nombreCita").value;
+    nombresCitas.push(nombreCita)
+}
+function suenaAlarma() {
+    //Enciendo el sonido de la alarma
+    let etiquetaAudio = document.createElement("audio");
+    etiquetaAudio.setAttribute("src", "alarma.mp3");
+    etiquetaAudio.play();
+    var contadorAlarma = 0;
+    var alarma = setInterval(
+        function(){
+            document.body.style.background = randomColor();
+            contadorAlarma += 100;
+            if (contadorAlarma == 15000) {
+                clearInterval(alarma);
+                etiquetaAudio.pause();
+                document.body.style.background = "white";
+            }
+        },100);
+}
+function randomColor() {
+    var colores = ["red","blue","green","yellow","orange","purple","black","white"];
+    //return colores[0];
+    return colores[getRandomInt(0,8)];
+}
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function pintarCitas(dia) {
+    citas.forEach(element => {
+        var fechaCitaSeparada = element.split(" ");
+        var aux = "";
+        if (fechaCitaSeparada[0] == añoMostrado && fechaCitaSeparada[1] == (mesMostrado+1) &&  fechaCitaSeparada[2] == dia) {
+            aux += "<br> - "+fechaCitaSeparada[3]+":"+fechaCitaSeparada[4]+":"+fechaCitaSeparada[5];
+        }
+        document.getElementById("citasMostradas").innerHTML = aux;
+    });
 }
