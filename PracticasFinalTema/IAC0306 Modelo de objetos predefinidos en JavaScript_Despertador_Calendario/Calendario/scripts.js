@@ -102,7 +102,7 @@ function pintarDias() {
             }            
 
             //Recuperar estado inicial al cambiar de mes:
-            celda.style.backgroundColor = "#9bf5ff";
+            celda.style.backgroundColor = "#9bffc5";
             celda.style.color = "#492736";
             //los domingos los pinto de rojo
             if (j == 6) {
