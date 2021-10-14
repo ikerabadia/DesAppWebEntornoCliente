@@ -189,7 +189,7 @@ function pintarHora() {
             var fecha = new Date();
             var cita = fecha.getFullYear() + " " + (fecha.getMonth()+1) + " " + fecha.getDate() + " " + fecha.getHours()+" "+fecha.getMinutes()+" "+fecha.getSeconds();
             if(citas.includes(cita)){
-                suenaAlarma();
+                suenaAlarma(cita);
             }
             document.getElementById("horaMostrada").innerHTML=fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
         },1000);
@@ -219,28 +219,43 @@ function guardarCita(){
     document.getElementById("segundo").value;    
     citas.push(cita);
     var nombreCita = document.getElementById("nombreCita").value;
-    nombresCitas.push(nombreCita)
+    nombresCitas.push(nombreCita);
+    datosCita(document.getElementById("dia").value);
+    limpiarCamposCita();
 }
-function suenaAlarma() {
+
+function limpiarCamposCita() {
+    document.getElementById("nombreCita").value = "";
+    document.getElementById("año").value = "";
+    document.getElementById("mes").value = "";
+    document.getElementById("dia").value = "";
+    document.getElementById("hora").value = "";
+    document.getElementById("minuto").value = "";
+    document.getElementById("segundo").value = "";
+}
+
+function suenaAlarma(cita) {
     //Enciendo el sonido de la alarma
     let etiquetaAudio = document.createElement("audio");
     etiquetaAudio.setAttribute("src", "alarma.mp3");
     etiquetaAudio.play();
     var contadorAlarma = 0;
+    document.getElementById("avisoCita").innerHTML="<h2>"+ nombresCitas[citas.indexOf(cita)] +"</h2>";
     var alarma = setInterval(
         function(){
-            document.body.style.background = randomColor();
+            document.getElementById("avisoCita").style.background = randomColor();
             contadorAlarma += 100;
             if (contadorAlarma == 15000) {
                 clearInterval(alarma);
                 etiquetaAudio.pause();
-                document.body.style.background = "white";
+                document.getElementById("avisoCita").style.background = "white";
+                document.getElementById("avisoCita").innerHTML = "";
+                alert("Tienes una cita:<br>- "+nombresCitas[citas.indexOf(cita)]);
             }
         },100);
 }
 function randomColor() {
     var colores = ["red","blue","green","yellow","orange","purple","black","white"];
-    //return colores[0];
     return colores[getRandomInt(0,8)];
 }
 function getRandomInt(min, max) {
@@ -252,7 +267,9 @@ function pintarCitas(dia) {
         var fechaCitaSeparada = element.split(" ");
         var aux = "";
         if (fechaCitaSeparada[0] == añoMostrado && fechaCitaSeparada[1] == (mesMostrado+1) &&  fechaCitaSeparada[2] == dia) {
-            aux += "<br> - "+fechaCitaSeparada[3]+":"+fechaCitaSeparada[4]+":"+fechaCitaSeparada[5];
+            
+            aux += "<br> - "+fechaCitaSeparada[3]+":"+fechaCitaSeparada[4]+":"+fechaCitaSeparada[5] + " -> ";
+            aux += nombresCitas[citas.indexOf(element)];
         }
         document.getElementById("citasMostradas").innerHTML = aux;
     });
