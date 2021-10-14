@@ -117,6 +117,18 @@ function pintarDias() {
                 celda.style.backgroundColor = "#f0b19e";
                 celda.innerHTML = "<a title='Fecha Actual' onClick=\"datosCita("+ diaActual +")\">" + diaActual + "</a>";
             }
+            //Pinto las citas del dia dentro de la celda
+            citas.forEach(element => {
+                var fechaCitaSeparada = element.split(" ");
+                var aux = "";
+                if (fechaCitaSeparada[0] == añoMostrado && fechaCitaSeparada[1] == (mesActual+1) &&  fechaCitaSeparada[2] == diaActual) {
+                    
+                    aux += "<br> - "+fechaCitaSeparada[3]+":"+fechaCitaSeparada[4]+":"+fechaCitaSeparada[5] + " -> ";
+                    aux += nombresCitas[citas.indexOf(element)];
+                    celda.innerHTML+=aux;
+                }
+                //document.getElementById("citasMostradas").innerHTML = aux;
+            });
             //Actualizo el diaActual al siguiente dia para la siguiente vuelta de bucle
             diaActual = diaActual+1;
             diaMes.setDate(diaActual);
@@ -250,7 +262,7 @@ function suenaAlarma(cita) {
                 etiquetaAudio.pause();
                 document.getElementById("avisoCita").style.background = "white";
                 document.getElementById("avisoCita").innerHTML = "";
-                alert("Tienes una cita:<br>- "+nombresCitas[citas.indexOf(cita)]);
+                alert("Tienes una cita:- "+nombresCitas[citas.indexOf(cita)]);
             }
         },100);
 }
@@ -263,14 +275,16 @@ function getRandomInt(min, max) {
 }
 
 function pintarCitas(dia) {
+    var aux = "";
     citas.forEach(element => {
         var fechaCitaSeparada = element.split(" ");
-        var aux = "";
+        
         if (fechaCitaSeparada[0] == añoMostrado && fechaCitaSeparada[1] == (mesMostrado+1) &&  fechaCitaSeparada[2] == dia) {
             
             aux += "<br> - "+fechaCitaSeparada[3]+":"+fechaCitaSeparada[4]+":"+fechaCitaSeparada[5] + " -> ";
             aux += nombresCitas[citas.indexOf(element)];
-        }
-        document.getElementById("citasMostradas").innerHTML = aux;
+        }        
     });
+    document.getElementById("citasMostradas").innerHTML = aux;
+    pintarDias();
 }
