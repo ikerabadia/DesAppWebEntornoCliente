@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>DESPERTADOR</title>
+    <meta charset="utf-8" />
+    <link rel="script" href="scripts.js"></link>
+  </head>
+
+  <body>
+      <div id="content">
+        <h1>DESPERTADOR</h1>
+        <p id="horaActual"></p>
+            <script src="./scripts.js"></script>
+            <h2>Crear alarma</h2>
+            <form action="/action_page.php">
+                <label for="hora">Horas:</label>
+                <input type="number" id="hora" name="hora"><br>
+                <label for="minuto">Minutos:</label>
+                <input type="number" id="minuto" name="minuto"><br>
+                <label for="segundo">Segundos:</label>
+                <input type="number" id="segundo" name="segundo"><br>
+            </form> 
+            <button onclick="guardarAlarma()">Guardar Alarma</button>
+       </div> 
+  </body>
+</html>
