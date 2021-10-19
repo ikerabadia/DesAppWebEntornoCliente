@@ -1,6 +1,6 @@
 /*3. Escribir una función de JavaScript que acepte fila, columna, (para identificar una celda en particular)
  y una cadena para actualizar el contenido de esa celda.*/
-document.onload = function(){
+window.onload = function(){
     var fila = document.getElementById("fila");
     fila.minValue = 0;
     fila.maxValue = document.getElementById("tabla").children.length-1;
