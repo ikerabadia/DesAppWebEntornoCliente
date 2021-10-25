@@ -4,6 +4,8 @@ let palabrasContadasParrafo = new Array();
 let tresPalabrasMayorAparicionPalabra = new Array();
 let tresPalabrasMayorAparicionApariciones = new Array();
 let ultimoParrafo;
+let ultimoTitulo;
+let palabrasUltimoTitulo;
 
 function robot() {
   var info = document.querySelectorAll("H1,H2,H3,H4,H5,H6,P,B,I,A");
@@ -40,18 +42,24 @@ function robot() {
                 palabrasContadasBloqueParrafos[clave] >
                 tresPalabrasMayorAparicionApariciones[2]
               ) {
-                tresPalabrasMayorAparicionPalabra[0]=tresPalabrasMayorAparicionPalabra[1];
-                tresPalabrasMayorAparicionApariciones[0]=tresPalabrasMayorAparicionApariciones[1];
+                tresPalabrasMayorAparicionPalabra[0] =
+                  tresPalabrasMayorAparicionPalabra[1];
+                tresPalabrasMayorAparicionApariciones[0] =
+                  tresPalabrasMayorAparicionApariciones[1];
 
-                tresPalabrasMayorAparicionPalabra[1]=tresPalabrasMayorAparicionPalabra[2];
-                tresPalabrasMayorAparicionApariciones[1]=tresPalabrasMayorAparicionApariciones[2];
+                tresPalabrasMayorAparicionPalabra[1] =
+                  tresPalabrasMayorAparicionPalabra[2];
+                tresPalabrasMayorAparicionApariciones[1] =
+                  tresPalabrasMayorAparicionApariciones[2];
 
                 tresPalabrasMayorAparicionPalabra[2] = clave;
                 tresPalabrasMayorAparicionApariciones[2] =
                   palabrasContadasBloqueParrafos[clave];
               } else {
-                tresPalabrasMayorAparicionPalabra[0]=tresPalabrasMayorAparicionPalabra[1];
-                tresPalabrasMayorAparicionApariciones[0]=tresPalabrasMayorAparicionApariciones[1];
+                tresPalabrasMayorAparicionPalabra[0] =
+                  tresPalabrasMayorAparicionPalabra[1];
+                tresPalabrasMayorAparicionApariciones[0] =
+                  tresPalabrasMayorAparicionApariciones[1];
 
                 tresPalabrasMayorAparicionPalabra[1] = clave;
                 tresPalabrasMayorAparicionApariciones[1] =
@@ -64,8 +72,8 @@ function robot() {
             }
           }
         }
-
-        ultimoParrafo.innerHTML +=
+        var datosBloque = "";
+        datosBloque +=
           '<br><span style=" border: 1px solid black">Las tres palabras mas repetidas en el bloque son: ' +
           tresPalabrasMayorAparicionPalabra[0] +
           "(" +
@@ -78,9 +86,26 @@ function robot() {
           tresPalabrasMayorAparicionPalabra[2] +
           "(" +
           tresPalabrasMayorAparicionApariciones[2] +
-          ")</span>";
-      }
+          ')</span><br><span style=" border: 1px solid black">Palabras del titulo: ';
 
+        //Pinto las palabras del ultimo titulo con las veces que aparecen si es que lo hacen
+        if (ultimoTitulo != undefined) {
+          palabrasUltimoTitulo = quitaPalabrasSinSentido(
+            ultimoTitulo.innerHTML
+          );
+          palabrasUltimoTitulo.forEach((palabra) => {
+            if (palabrasContadasBloqueParrafos[palabra] == undefined) {
+              datosBloque += palabra + "(0) ";
+            } else {
+              datosBloque +=
+                palabra + "(" + palabrasContadasBloqueParrafos[palabra] + ") ";
+            }
+          });
+          datosBloque += "</span>";
+          ultimoParrafo.innerHTML += datosBloque;
+        }
+      }
+      ultimoTitulo = element;
       palabrasContadasBloqueParrafos = new Array();
       palabrasContadasParrafo = new Array();
     }
@@ -113,18 +138,24 @@ function robot() {
               palabrasContadasParrafo[clave] >
               tresPalabrasMayorAparicionApariciones[2]
             ) {
-              tresPalabrasMayorAparicionPalabra[0]=tresPalabrasMayorAparicionPalabra[1];
-              tresPalabrasMayorAparicionApariciones[0]=tresPalabrasMayorAparicionApariciones[1];
+              tresPalabrasMayorAparicionPalabra[0] =
+                tresPalabrasMayorAparicionPalabra[1];
+              tresPalabrasMayorAparicionApariciones[0] =
+                tresPalabrasMayorAparicionApariciones[1];
 
-              tresPalabrasMayorAparicionPalabra[1]=tresPalabrasMayorAparicionPalabra[2];
-              tresPalabrasMayorAparicionApariciones[1]=tresPalabrasMayorAparicionApariciones[2];
+              tresPalabrasMayorAparicionPalabra[1] =
+                tresPalabrasMayorAparicionPalabra[2];
+              tresPalabrasMayorAparicionApariciones[1] =
+                tresPalabrasMayorAparicionApariciones[2];
 
               tresPalabrasMayorAparicionPalabra[2] = clave;
               tresPalabrasMayorAparicionApariciones[2] =
                 palabrasContadasParrafo[clave];
             } else {
-              tresPalabrasMayorAparicionPalabra[0]=tresPalabrasMayorAparicionPalabra[1];
-              tresPalabrasMayorAparicionApariciones[0]=tresPalabrasMayorAparicionApariciones[1];
+              tresPalabrasMayorAparicionPalabra[0] =
+                tresPalabrasMayorAparicionPalabra[1];
+              tresPalabrasMayorAparicionApariciones[0] =
+                tresPalabrasMayorAparicionApariciones[1];
 
               tresPalabrasMayorAparicionPalabra[1] = clave;
               tresPalabrasMayorAparicionApariciones[1] =
@@ -144,15 +175,27 @@ function robot() {
         tresPalabrasMayorAparicionPalabra[0] +
         "(" +
         tresPalabrasMayorAparicionApariciones[0] +
-        "), " +
+        ")" +
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[0],"B") +" "+
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[0],"I") +" "+
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[0],"A") +
+        ", " +
         tresPalabrasMayorAparicionPalabra[1] +
         "(" +
         tresPalabrasMayorAparicionApariciones[1] +
-        "), " +
+        ")" +
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[1],"B") +" "+
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[1],"I") +" "+
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[1],"A") +
+        ", " +
         tresPalabrasMayorAparicionPalabra[2] +
         "(" +
         tresPalabrasMayorAparicionApariciones[2] +
-        ")</span>";
+        ")" +
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[2],"B") +" "+
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[2],"I") +" "+
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[2],"A") +
+        "</span>";
     }
   });
   //Pinto la informacion del ultimo parrafo
@@ -176,18 +219,24 @@ function robot() {
           palabrasContadasBloqueParrafos[clave] >
           tresPalabrasMayorAparicionApariciones[2]
         ) {
-          tresPalabrasMayorAparicionPalabra[0]=tresPalabrasMayorAparicionPalabra[1];
-          tresPalabrasMayorAparicionApariciones[0]=tresPalabrasMayorAparicionApariciones[1];
+          tresPalabrasMayorAparicionPalabra[0] =
+            tresPalabrasMayorAparicionPalabra[1];
+          tresPalabrasMayorAparicionApariciones[0] =
+            tresPalabrasMayorAparicionApariciones[1];
 
-          tresPalabrasMayorAparicionPalabra[1]=tresPalabrasMayorAparicionPalabra[2];
-          tresPalabrasMayorAparicionApariciones[1]=tresPalabrasMayorAparicionApariciones[2];
+          tresPalabrasMayorAparicionPalabra[1] =
+            tresPalabrasMayorAparicionPalabra[2];
+          tresPalabrasMayorAparicionApariciones[1] =
+            tresPalabrasMayorAparicionApariciones[2];
 
           tresPalabrasMayorAparicionPalabra[2] = clave;
           tresPalabrasMayorAparicionApariciones[2] =
             palabrasContadasBloqueParrafos[clave];
         } else {
-          tresPalabrasMayorAparicionPalabra[0]=tresPalabrasMayorAparicionPalabra[1];
-          tresPalabrasMayorAparicionApariciones[0]=tresPalabrasMayorAparicionApariciones[1];
+          tresPalabrasMayorAparicionPalabra[0] =
+            tresPalabrasMayorAparicionPalabra[1];
+          tresPalabrasMayorAparicionApariciones[0] =
+            tresPalabrasMayorAparicionApariciones[1];
 
           tresPalabrasMayorAparicionPalabra[1] = clave;
           tresPalabrasMayorAparicionApariciones[1] =
@@ -201,7 +250,8 @@ function robot() {
     }
   }
 
-  ultimoParrafo.innerHTML +=
+  var datosBloque = "";
+  datosBloque +=
     '<br><span style=" border: 1px solid black">Las tres palabras mas repetidas en el bloque son: ' +
     tresPalabrasMayorAparicionPalabra[0] +
     "(" +
@@ -214,7 +264,22 @@ function robot() {
     tresPalabrasMayorAparicionPalabra[2] +
     "(" +
     tresPalabrasMayorAparicionApariciones[2] +
-    ")</span>";
+    ')</span><br><span style=" border: 1px solid black">Palabras del titulo: ';
+
+  //Pinto las palabras del ultimo titulo con las veces que aparecen si es que lo hacen
+  if (ultimoTitulo != undefined) {
+    palabrasUltimoTitulo = quitaPalabrasSinSentido(ultimoTitulo.innerHTML);
+    palabrasUltimoTitulo.forEach((palabra) => {
+      if (palabrasContadasBloqueParrafos[palabra] == undefined) {
+        datosBloque += palabra + "(0) ";
+      } else {
+        datosBloque +=
+          palabra + "(" + palabrasContadasBloqueParrafos[palabra] + ") ";
+      }
+    });
+    datosBloque += "</span>";
+    ultimoParrafo.innerHTML += datosBloque;
+  }
 
   //PINTO LA INFORMACION DE TODO EL DOCUMENTO
   tresPalabrasMayorAparicionPalabra[0] = "a";
@@ -234,18 +299,24 @@ function robot() {
         if (
           palabrasContadasBody[clave] > tresPalabrasMayorAparicionApariciones[2]
         ) {
-          tresPalabrasMayorAparicionPalabra[0]=tresPalabrasMayorAparicionPalabra[1];
-          tresPalabrasMayorAparicionApariciones[0]=tresPalabrasMayorAparicionApariciones[1];
+          tresPalabrasMayorAparicionPalabra[0] =
+            tresPalabrasMayorAparicionPalabra[1];
+          tresPalabrasMayorAparicionApariciones[0] =
+            tresPalabrasMayorAparicionApariciones[1];
 
-          tresPalabrasMayorAparicionPalabra[1]=tresPalabrasMayorAparicionPalabra[2];
-          tresPalabrasMayorAparicionApariciones[1]=tresPalabrasMayorAparicionApariciones[2];
+          tresPalabrasMayorAparicionPalabra[1] =
+            tresPalabrasMayorAparicionPalabra[2];
+          tresPalabrasMayorAparicionApariciones[1] =
+            tresPalabrasMayorAparicionApariciones[2];
 
           tresPalabrasMayorAparicionPalabra[2] = clave;
           tresPalabrasMayorAparicionApariciones[2] =
             palabrasContadasBody[clave];
         } else {
-          tresPalabrasMayorAparicionPalabra[0]=tresPalabrasMayorAparicionPalabra[1];
-          tresPalabrasMayorAparicionApariciones[0]=tresPalabrasMayorAparicionApariciones[1];
+          tresPalabrasMayorAparicionPalabra[0] =
+            tresPalabrasMayorAparicionPalabra[1];
+          tresPalabrasMayorAparicionApariciones[0] =
+            tresPalabrasMayorAparicionApariciones[1];
 
           tresPalabrasMayorAparicionPalabra[1] = clave;
           tresPalabrasMayorAparicionApariciones[1] =
@@ -258,20 +329,23 @@ function robot() {
     }
   }
 
-  document.body.insertAdjacentHTML("afterend",'<h3>Palabras mas repetidas</h3><br><p>' +
-  tresPalabrasMayorAparicionPalabra[0] +
-  ":" +
-  tresPalabrasMayorAparicionApariciones[0] +
-  "<br>" +
-  tresPalabrasMayorAparicionPalabra[1] +
-  ":" +
-  tresPalabrasMayorAparicionApariciones[1] +
-  "<br>" +
-  tresPalabrasMayorAparicionPalabra[2] +
-  ":" +
-  tresPalabrasMayorAparicionApariciones[2] +
-  "</p>");
-    
+  document.body.insertAdjacentHTML(
+    "afterend",
+    "<h3>Palabras mas repetidas</h3><br><p>" +
+      tresPalabrasMayorAparicionPalabra[0] +
+      ":" +
+      tresPalabrasMayorAparicionApariciones[0] +
+      "<br>" +
+      tresPalabrasMayorAparicionPalabra[1] +
+      ":" +
+      tresPalabrasMayorAparicionApariciones[1] +
+      "<br>" +
+      tresPalabrasMayorAparicionPalabra[2] +
+      ":" +
+      tresPalabrasMayorAparicionApariciones[2] +
+      "</p>"
+  );
+
   //FIN DE LA LECTURA
 }
 
@@ -325,3 +399,32 @@ function cuentaPalabrasParrafo(arrayPalabras) {
     }
   });
 }
+
+function getCuentaEstilos(parrafo, palabra, tag) {
+  var negritas = Array.from(parrafo.getElementsByTagName(tag));
+  var palabrasNegrita = "";
+  negritas.forEach((element) => {
+    palabrasNegrita += " " + element.innerHTML;
+  });
+  palabrasNegritaLimpias = quitaPalabrasSinSentido(palabrasNegrita);
+  var aparicionesPalabra = 0;
+  palabrasNegritaLimpias.forEach((negrita) => {
+    if (palabra == negrita) {
+      aparicionesPalabra++;
+    }
+  });
+  switch (tag) {
+    case "B":
+      return "Negrita(" + aparicionesPalabra + ") ";
+      break;
+    case "I":
+      return "Cursiva(" + aparicionesPalabra + ") ";
+      break;
+    case "A":
+      return "Enlaces(" + aparicionesPalabra + ") ";
+      break;
+    default:
+      break;
+  }
+}
+
