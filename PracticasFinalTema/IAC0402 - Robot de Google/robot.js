@@ -171,30 +171,52 @@ function robot() {
 
       //Muestro los datos en el html
       element.innerHTML +=
-        '<br><span style=" border: 1px solid black">Las tres palabras mas repetidas en el parrafo son: ' +
+        '<br><span style=" border: 1px solid black">Las tres palabras mas repetidas en el parrafo son:<br> - ' +
         tresPalabrasMayorAparicionPalabra[0] +
         "(" +
         tresPalabrasMayorAparicionApariciones[0] +
         ")" +
-        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[0],"B") +" "+
-        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[0],"I") +" "+
-        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[0],"A") +
-        ", " +
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[0], "B") +
+        " " +
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[0], "I") +
+        " " +
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[0], "A") +
+        " Aparece en todos los parrafos de su bloque: " +
+        aparicionPalabraTodosParrafosBloque(
+          tresPalabrasMayorAparicionPalabra[0],
+          ultimoTitulo
+        ) +
+        "<br> - " +
         tresPalabrasMayorAparicionPalabra[1] +
         "(" +
         tresPalabrasMayorAparicionApariciones[1] +
         ")" +
-        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[1],"B") +" "+
-        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[1],"I") +" "+
-        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[1],"A") +
-        ", " +
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[1], "B") +
+        " " +
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[1], "I") +
+        " " +
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[1], "A") +
+        " Aparece en todos los parrafos de su bloque: " +
+        aparicionPalabraTodosParrafosBloque(
+          tresPalabrasMayorAparicionPalabra[1],
+          ultimoTitulo
+        ) +
+        "<br> - " +
         tresPalabrasMayorAparicionPalabra[2] +
         "(" +
         tresPalabrasMayorAparicionApariciones[2] +
         ")" +
-        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[2],"B") +" "+
-        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[2],"I") +" "+
-        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[2],"A") +
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[2], "B") +
+        " " +
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[2], "I") +
+        " " +
+        getCuentaEstilos(element, tresPalabrasMayorAparicionPalabra[2], "A") +
+        " Aparece en todos los parrafos de su bloque: " +
+        aparicionPalabraTodosParrafosBloque(
+          tresPalabrasMayorAparicionPalabra[2],
+          ultimoTitulo
+        ) + "<br>"+
+        getInfoEnlaces(ultimoParrafo)+
         "</span>";
     }
   });
@@ -252,15 +274,15 @@ function robot() {
 
   var datosBloque = "";
   datosBloque +=
-    '<br><span style=" border: 1px solid black">Las tres palabras mas repetidas en el bloque son: ' +
+    '<br><span style=" border: 1px solid black">Las tres palabras mas repetidas en el bloque son: <br>- ' +
     tresPalabrasMayorAparicionPalabra[0] +
     "(" +
     tresPalabrasMayorAparicionApariciones[0] +
-    "), " +
+    ")<br>- " +
     tresPalabrasMayorAparicionPalabra[1] +
     "(" +
     tresPalabrasMayorAparicionApariciones[1] +
-    "), " +
+    ")<br>- " +
     tresPalabrasMayorAparicionPalabra[2] +
     "(" +
     tresPalabrasMayorAparicionApariciones[2] +
@@ -428,3 +450,51 @@ function getCuentaEstilos(parrafo, palabra, tag) {
   }
 }
 
+function aparicionPalabraTodosParrafosBloque(palabra, ultimoTitulo) {
+  var ultimoElemento = ultimoTitulo.nextElementSibling;
+  var palabrasParrafo = new Array();
+
+  while (
+    ultimoElemento.tagName != "H1" &&
+    ultimoElemento.tagName != "H2" &&
+    ultimoElemento.tagName != "H3" &&
+    ultimoElemento.tagName != "H4" &&
+    ultimoElemento.tagName != "H5" &&
+    ultimoElemento.tagName != "H6"
+  ) {
+    if (ultimoElemento.tagName == "P") {
+      palabrasParrafo = quitaPalabrasSinSentido(ultimoElemento.innerHTML);
+      if (!palabrasParrafo.includes(palabra.toLowerCase())) {
+        return "NO";
+      }
+    }
+    ultimoElemento = ultimoElemento.nextElementSibling;
+    if (ultimoElemento == null) {
+      break;
+    }
+  }
+  return "SI";
+}
+
+function getInfoEnlaces(ultimoParrafo) {
+  var aux = "Enlaces <br>";
+  var enlaces = Array.from(ultimoParrafo.getElementsByTagName("A"));
+  enlaces.forEach(enlace => {
+    aux+=enlace.innerHTML + "-> Url: "+ enlace.href + " Coincidencias entre URL y descripcion: " + getCoincidenciasEnlace(enlace);
+
+  });
+  return aux;
+}
+
+function getCoincidenciasEnlace(enlace) {
+  
+  var palabrasDescripcion = quitaPalabrasSinSentido(enlace.innerHTML);
+  //var palabrasURL = enlace.href.split(/[ /-\.]+/);
+  var aux = "";
+  palabrasDescripcion.forEach(palabraDescripcion => {
+    if (enlace.href.toLowerCase().includes(palabraDescripcion)) {
+      aux+=" "+palabraDescripcion
+    }
+  });
+  return aux;
+}
