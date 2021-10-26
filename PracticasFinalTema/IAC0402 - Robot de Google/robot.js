@@ -6,8 +6,34 @@ let tresPalabrasMayorAparicionApariciones = new Array();
 let ultimoParrafo;
 let ultimoTitulo;
 let palabrasUltimoTitulo;
+let temaPagina;
 
+/**
+ * La forma de saber de que va la pagina es mediante un sistema
+ * de puntaje en el que la palabra ganara:
+ * 20 puntos por aparecer en un h1
+ * 18 puntos por aparecer en un h2
+ * 16 puntos por aparecer en un h3
+ * 14 puntos por aparecer en un h4
+ * 12 puntos por aparecer en un h5
+ * 10 puntos por aparecer en un h6
+ * Aparecer en un titulo es lo que mas puntaje va a otorgar a una palabra puesto que creo que una palabra que
+ * aparece en un titulo va a tener siempre un grado de relevancia mayor que una que se repita varias veces en
+ * un solo parrafo o una que aparezca en negrita aunque sean varias veces
+ * 1 punto por aparecer en un p
+ * Estas son las que menos puntaje suman puesto que es lo menos relevante que hay desde mi punto de vista
+ * 2 puntos por aparecer en cursiva
+ * 4 puntos por aparecer en negrita
+ * despues de los parrafos, aparecer en negrita o cursiva es lo menos relevante, pero desde mi punto de vista
+ * la negrita pretende ser mas relevante que la cursiva
+ * 7 puntos por aparecer en un enlace
+ * Me parece bastante relevante una palabra que aparece en un enlace por eso le he querido dar una puntuacion
+ * pesada pero sin llegar a equivaler a un titulo
+ * 200 puntos por estar en el title del html ya que me parece que claramente si una palabra aparece en el 
+ * title, la pagina va a tratar sobre eso
+ */
 function robot() {
+  temaPagina = getTemaPagina();
   var info = document.querySelectorAll("H1,H2,H3,H4,H5,H6,P,B,I,A");
   info.forEach((element) => {
     //Si el elemento es un titulo reinicio bloque
@@ -215,8 +241,9 @@ function robot() {
         aparicionPalabraTodosParrafosBloque(
           tresPalabrasMayorAparicionPalabra[2],
           ultimoTitulo
-        ) + "<br>"+
-        getInfoEnlaces(ultimoParrafo)+
+        ) +
+        "<br>" +
+        getInfoEnlaces(ultimoParrafo) +
         "</span>";
     }
   });
@@ -365,7 +392,9 @@ function robot() {
       tresPalabrasMayorAparicionPalabra[2] +
       ":" +
       tresPalabrasMayorAparicionApariciones[2] +
-      "</p>"
+      "</p>"+
+      "<h3>Tema de la pagina<h3><br>"+
+      temaPagina
   );
 
   //FIN DE LA LECTURA
@@ -380,7 +409,7 @@ function quitarSimbolos(palabra) {
 
 function quitaPalabrasSinSentido(texto) {
   var palabrasInutiles =
-    "se son será vez al también junto donde llamado muchas fue a b c d e f g h i j k l m n o p q r s t u v w x y z ante bajo con contra de desde durante en entre hacia hasta mediante para por según sin sobre tras vía el él más la los las lo un una unos unas uno su como del es de muy que y ya tales tenía".split(
+    "and on each are as only its to of sup idciteref classreference href cite note hrefcitenote in other is has the with span reltag se son será vez al también junto donde llamado muchas fue a b c d e f g h i j k l m n o p q r s t u v w x y z ante bajo con contra de desde durante en entre hacia hasta mediante para por según sin sobre tras vía el él más la los las lo un una unos unas uno su como del es de muy que y ya tales tenía".split(
       " "
     );
   var textoSeparado = texto.split(/[ <>]+/);
@@ -479,22 +508,148 @@ function aparicionPalabraTodosParrafosBloque(palabra, ultimoTitulo) {
 function getInfoEnlaces(ultimoParrafo) {
   var aux = "Enlaces <br>";
   var enlaces = Array.from(ultimoParrafo.getElementsByTagName("A"));
-  enlaces.forEach(enlace => {
-    aux+=enlace.innerHTML + "-> Url: "+ enlace.href + " Coincidencias entre URL y descripcion: " + getCoincidenciasEnlace(enlace);
-
+  enlaces.forEach((enlace) => {
+    aux +=
+      enlace.innerHTML +
+      "-> Url: " +
+      enlace.href +
+      " Coincidencias entre URL y descripcion: " +
+      getCoincidenciasEnlace(enlace);
   });
   return aux;
 }
 
 function getCoincidenciasEnlace(enlace) {
-  
   var palabrasDescripcion = quitaPalabrasSinSentido(enlace.innerHTML);
   //var palabrasURL = enlace.href.split(/[ /-\.]+/);
   var aux = "";
-  palabrasDescripcion.forEach(palabraDescripcion => {
+  palabrasDescripcion.forEach((palabraDescripcion) => {
     if (enlace.href.toLowerCase().includes(palabraDescripcion)) {
-      aux+=" "+palabraDescripcion
+      aux += " " + palabraDescripcion+"<br>";
     }
   });
+  return aux;
+}
+
+/**
+ * Este es el algoritmo de puntaje para saber de que va la pagina, la forma de saber esto es mediante un sistema
+ * de puntaje en el que la palabra ganara:
+ * 20 puntos por aparecer en un h1
+ * 18 puntos por aparecer en un h2
+ * 16 puntos por aparecer en un h3
+ * 14 puntos por aparecer en un h4
+ * 12 puntos por aparecer en un h5
+ * 10 puntos por aparecer en un h6
+ * Aparecer en un titulo es lo que mas puntaje va a otorgar a una palabra puesto que creo que una palabra que
+ * aparece en un titulo va a tener siempre un grado de relevancia mayor que una que se repita varias veces en
+ * un solo parrafo o una que aparezca en negrita aunque sean varias veces
+ * 1 punto por aparecer en un p
+ * Estas son las que menos puntaje suman puesto que es lo menos relevante que hay desde mi punto de vista
+ * 2 puntos por aparecer en cursiva
+ * 4 puntos por aparecer en negrita
+ * despues de los parrafos, aparecer en negrita o cursiva es lo menos relevante, pero desde mi punto de vista
+ * la negrita pretende ser mas relevante que la cursiva
+ * 7 puntos por aparecer en un enlace
+ * Me parece bastante relevante una palabra que aparece en un enlace por eso le he querido dar una puntuacion
+ * pesada pero sin llegar a equivaler a un titulo
+ */
+function getTemaPagina() {
+  var palabrasContadas = new Array();
+  var palabrasElemento = new Array();
+  var elementos = document.querySelectorAll("H1,H2,H3,H4,H5,H6,P,B,I,A");
+  var aux = "</h1>Esta pagina va de: ";
+
+  //Recorro los elementos y las palabras de cada elemento y voy asignando puntuaciones
+  elementos.forEach((element) => {
+    palabrasElemento = quitaPalabrasSinSentido(element.innerHTML);
+    palabrasElemento.forEach((palabra) => {
+      if (palabrasContadas[palabra] == undefined) {
+        switch (element.tagName) {
+          case "H1":
+            palabrasContadas[palabra] = 20;
+            break;
+          case "H2":
+            palabrasContadas[palabra] = 18;
+            break;
+          case "H3":
+            palabrasContadas[palabra] = 16;
+            break;
+          case "H4":
+            palabrasContadas[palabra] = 14;
+            break;
+          case "H5":
+            palabrasContadas[palabra] = 12;
+            break;
+          case "H5":
+            palabrasContadas[palabra] = 10;
+            break;
+          case "P":
+            palabrasContadas[palabra] = 1;
+            break;
+          case "B":
+            palabrasContadas[palabra] = 4;
+            break;
+          case "I":
+            palabrasContadas[palabra] = 2;
+            break;
+          case "A":
+            palabrasContadas[palabra] = 7;
+            break;
+          default:
+            break;
+        }
+      } else {
+        switch (element.tagName) {
+          case "H1":
+            palabrasContadas[palabra] += 20;
+            break;
+          case "H2":
+            palabrasContadas[palabra] += 18;
+            break;
+          case "H3":
+            palabrasContadas[palabra] += 16;
+            break;
+          case "H4":
+            palabrasContadas[palabra] += 14;
+            break;
+          case "H5":
+            palabrasContadas[palabra] += 12;
+            break;
+          case "H5":
+            palabrasContadas[palabra] += 10;
+            break;
+          case "P":
+            palabrasContadas[palabra] += 1;
+            break;
+          case "B":
+            palabrasContadas[palabra] += 4;
+            break;
+          case "I":
+            palabrasContadas[palabra] += 2;
+            break;
+          case "A":
+            palabrasContadas[palabra] += 7;
+            break;
+          default:
+            break;
+        }
+      }
+    });
+  });
+
+  //Ahora voy a añadir puntuaciones segun las palabras del titulo
+  var palabrasTitle = document.title.split(" ");
+  palabrasTitle.forEach(palabraTitulo => {
+    if (palabrasContadas[palabraTitulo] == undefined) {
+      palabrasContadas[palabraTitulo] = 200;
+    }else{
+      palabrasContadas[palabraTitulo] += 200;
+    }
+  });
+  //Y ahora extraigo las 3 con mas puntuacion, las formateo y las devuelvo
+  var palabrasContadasOrdenadas = Object.entries(palabrasContadas);
+  palabrasContadasOrdenadas.sort((a, b) => a[1] - b[1]);
+  var contador = 0;
+  aux+=palabrasContadasOrdenadas[palabrasContadasOrdenadas.length-1][0] + " " + palabrasContadasOrdenadas[palabrasContadasOrdenadas.length-2][0] + " " + palabrasContadasOrdenadas[palabrasContadasOrdenadas.length-3][0]; 
   return aux;
 }
