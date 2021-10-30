@@ -11,6 +11,7 @@ function ValidaCampos(formulario) {
       element.style.background == "green";
     }else{
       alert("Campos requeridos sin completar");
+      return false;
     }
   });
 
@@ -19,6 +20,7 @@ function ValidaCampos(formulario) {
       element.style.background == "green";
     }else{
       alert("Campos de texto incorrecto");
+      return false;
     }
   });
 
@@ -27,6 +29,7 @@ function ValidaCampos(formulario) {
       element.style.background == "green";
     }else{
       alert("Campo de telefono incorrecto");
+      return false;
     }
   });
 
@@ -35,6 +38,7 @@ function ValidaCampos(formulario) {
       element.style.background == "green";
     }else{
       alert("Campos de email incorrecto");
+      return false;
     }
   });
 
@@ -43,6 +47,7 @@ function ValidaCampos(formulario) {
       element.style.background == "green";
     }else{
       alert("Campos de dni incorrecto");
+      return false;
     }
   });
 }
