@@ -1,0 +1,152 @@
+/*GENERAL*/
+body{
+    background: linear-gradient(45deg, black, gold);
+}
+input{
+    height: 40px;
+    font-size: 18px;
+    width: 100%;
+}
+input:focus, textarea:focus{
+    border-radius: 10px 1px;
+}
+i{
+    margin-right: 5px;    
+}
+a:hover{
+    cursor: pointer;
+}
+/*DATOS PERSONALES*/
+#cabecera{
+    display: flex;
+    justify-content: center;
+}
+#tituloPrincipal{
+    text-align: center;
+    background: whitesmoke;
+    border-radius: 30px 30px 0px 0px;
+    width: 50%;
+    margin-bottom: 0px;
+    border: 1px solid #606262;
+    border-bottom: 0px;
+}
+.divInputDatosPersonales{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.inputDatosPersonales{
+    width: 80%;
+}
+#divDatosPersonales {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 10px;
+}
+#imagenDatosPersonales {
+  border: 1px solid black;
+  height: 200px;
+  width: 35%;
+}
+.filaDatosPersonales{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background: gold;
+    border: 1px solid #606262;
+    height: 51px;
+    align-items: center;
+    border-left: 0px;
+    border-radius: 0px 20px 20px 0px;
+}
+.filaDatosPersonales div{
+    width: 30%;
+}
+#camposDatosPersonales{
+    width: 65%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*RESTO CONTENIDO*/
+#contenido{
+    padding: 5px;
+        background: whitesmoke;
+        border-radius: 1px 25px;
+        border: 1px solid #606262;
+}
+#restoContenido{
+    display: flex;
+    flex-direction: row;
+    border-top: 2px solid #606262;
+    margin-top: 20px;
+    border-bottom: 2px solid #606262;
+}
+#restoContenido h2{
+    text-align: center;
+}
+#divEstudios{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.divTituloEstudios{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+#divExperienciaLaboral{
+    width: 50%;
+    border-right: 5px solid #606262;
+    border-left: 5px solid #606262;
+    padding: 20px;
+}
+.cabeceraExperienciaLaboral input{
+    width: 30%;
+}
+#divHabilidades{
+    width: 25%;
+}
+.cabeceraExperienciaLaboral{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.divDescripcionExperienciaLaboral{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.descripcionExperienciaLaboral{
+    width: 100%;
+    height: 100px;
+}
+#divBotonEnviar{
+    margin-top: 10px;
+}
+.divEstudio{
+    background: gold;
+    padding: 12px;
+    border-radius: 20px 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.divExperienciaLaboral{
+    background: gold;
+    padding: 12px;
+    border-radius: 20px 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.divTituloExperienciaLaboral{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}

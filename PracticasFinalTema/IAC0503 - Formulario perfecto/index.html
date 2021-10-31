@@ -2,13 +2,14 @@
   <head>
     <title>IkerAbadia - Formulario perfecto</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
     <form id="formularioGeneral">
         
         <div id="cabecera">
-            <h1>Curriculum Vitae - Formulario Perfecto</h1>
+            <h1 id="tituloPrincipal">Curriculum Vitae - Formulario Perfecto</h1>
         </div>
         <div id="contenido">
             <div id="divDatosPersonales">
@@ -16,56 +17,99 @@
 
                 </div>
                 <div id="camposDatosPersonales">
-                    <div id="divDatosNombre">
-                        <div id="divNombre">
-                            <input type="text" id="inputNombre" placeholder="Nombre">
+                    <div class="filaDatosPersonales">
+                        <div id="divNombre" class="divInputDatosPersonales">
+                            <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                            <input type="text" class="inputDatosPersonales" id="inputNombre" placeholder="Nombre">
                         </div>
-                        <div id="divApellido1">
-                            <input type="text" id="inputApellido1" placeholder="apellido1">
+                        <div id="divApellido1" class="divInputDatosPersonales">
+                            <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                            <input type="text" class="inputDatosPersonales" id="inputApellido1" placeholder="apellido1">
                         </div>
-                        <div id="divApellido2">
-                            <input type="text" id="inputApellido2" placeholder="apellido2">
+                        <div id="divApellido2" class="divInputDatosPersonales">
+                            <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                            <input type="text" class="inputDatosPersonales" id="inputApellido2" placeholder="apellido2">
                         </div>    
                     </div>                       
-                    <div id="divEdadDirMail">
-                        <div id="divEdad">
-                            <input type="number" id="inputEdad" placeholder="Edad">
+                    <div class="filaDatosPersonales">
+                        <div id="divEdad" class="divInputDatosPersonales">
+                            <i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i>
+                            <input type="number" class="inputDatosPersonales" id="inputEdad" placeholder="Edad">
                         </div> 
-                        <div id="divDireccion">
-                            <input type="text" id="inputDireccion" placeholder="Direccion">
+                        <div id="divDireccion" class="divInputDatosPersonales">
+                            <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+                            <input type="text" class="inputDatosPersonales" id="inputDireccion" placeholder="Direccion">
                         </div>  
-                        <div id="divMail">
-                            <input type="email" id="inputMail" placeholder="Email">
+                        <div id="divMail" class="divInputDatosPersonales">
+                            <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+                            <input type="email" class="inputDatosPersonales" id="inputMail" placeholder="Email">
                         </div>
                                                  
                     </div> 
-                    <div id="divTelLinkGit">
-                        <div id="divTelefono">
-                            <input type="tel" id="inputTelefono" placeholder="Telefono">
+                    <div class="filaDatosPersonales">
+                        <div id="divTelefono" class="divInputDatosPersonales">
+                            <i class="fa fa-phone fa-2x" aria-hidden="true"></i>
+                            <input type="tel" class="inputDatosPersonales" id="inputTelefono" placeholder="Telefono">
                         </div> 
-                        <div id="divLinked">
-                            <input type="text" id="inputLinked" placeholder="LinkedIn">
+                        <div id="divLinked" class="divInputDatosPersonales">
+                            <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
+                            <input type="text" class="inputDatosPersonales" id="inputLinked" placeholder="LinkedIn">
                         </div> 
-                        <div id="divGithub">
-                            <input type="text" id="inputGithub" placeholder="Github">
+                        <div id="divGithub" class="divInputDatosPersonales">
+                            <i class="fa fa-github-square fa-2x" aria-hidden="true"></i>
+                            <input type="text" class="inputDatosPersonales" id="inputGithub" placeholder="Github">
                         </div>                                                  
                     </div> 
                 </div>                
             </div>
             <div id="restoContenido">
+
                 <div id="divEstudios">
-
+                    <div class="divTituloEstudios">
+                        <i class="fa fa-graduation-cap fa-2x" aria-hidden="true"></i>
+                        <h2>Estudios</h2>
+                    </div>
+                    <a class="btnAñadirEstudios" onclick="añadirEstudios()"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
+                    <div id="divContenedorEstudios">
+                        <div class="divEstudio">
+                            <input type="text" class="tituloEstudios" placeholder="titulo">
+                            <input type="date" class="fechaFinalizacionEstudios" placeholder="Fecha Finalizacion">
+                            <input type="text" class="centroEstudios" placeholder="Centro">
+                        </div>
+                    </div>                    
+                    <a class="btnAñadirEstudios" onclick="añadirEstudios()"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
                 </div>
+
                 <div id="divExperienciaLaboral">
-
+                    <div class="divTituloExperienciaLaboral">
+                        <i class="fa fa-briefcase fa-2x" aria-hidden="true"></i>
+                        <h2>Experiencia laboral</h2>
+                    </div>                    
+                    <a class="añadirExperienciaLaboral"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
+                    <div class="divExperienciaLaboral">
+                        <div class="cabeceraExperienciaLaboral">
+                            <input type="text" placeholder="Empresa" class="inputEmpresa">
+                            <input type="text" placeholder="Puesto" class="inputPuesto">
+                            <input type="date" placeholder="Fecha finalizacion" class="fechaFinalizacionExperienciaLaboral">
+                        </div>
+                        <div class="divDescripcionExperienciaLaboral">                            
+                            <textarea class="descripcionExperienciaLaboral" placeholder="Descripcion"></textarea>
+                        </div>
+                    </div>
+                    <a class="añadirExperienciaLaboral"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
                 </div>
+
                 <div id="divHabilidades">
-
+                    <h2>Habilidades</h2>
                 </div>
+
             </div>
-
+            <div id="divBotonEnviar">
+                <input style="border-radius: 30px;" type="submit" value="Submit">
+            </div>
         </div>
-
+        
     </form>
+    <script src="scripts.js"></script>
   </body>
 </html>
