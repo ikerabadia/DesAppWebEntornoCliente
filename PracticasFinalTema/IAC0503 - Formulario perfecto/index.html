@@ -72,10 +72,11 @@
                     <a class="btnAñadirEstudios" onclick="añadirEstudios()"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
                     <div id="divContenedorEstudios">
                         <div class="divEstudio">
-                            <input type="text" class="tituloEstudios" placeholder="titulo">
-                            <input type="date" class="fechaFinalizacionEstudios" placeholder="Fecha Finalizacion">
-                            <input type="text" class="centroEstudios" placeholder="Centro">
-                        </div>
+                            <input type="text" name="tituloEstudios1" class="tituloEstudios" placeholder="titulo">
+                            <input type="date" name="fechaFinalizacionEstudios1" class="fechaFinalizacionEstudios" placeholder="Fecha Finalizacion">
+                            <input type="text" name="centroEstudios1" class="centroEstudios" placeholder="Centro">
+                            <a class="btnEliminarElemento" onclick="eliminarElemento(this)"><i class="fa fa-minus-square fa-2x" aria-hidden="true"></i></a>
+                        </div>                        
                     </div>                    
                     <a class="btnAñadirEstudios" onclick="añadirEstudios()"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
                 </div>
@@ -85,18 +86,21 @@
                         <i class="fa fa-briefcase fa-2x" aria-hidden="true"></i>
                         <h2>Experiencia laboral</h2>
                     </div>                    
-                    <a class="añadirExperienciaLaboral"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
-                    <div class="divExperienciaLaboral">
-                        <div class="cabeceraExperienciaLaboral">
-                            <input type="text" placeholder="Empresa" class="inputEmpresa">
-                            <input type="text" placeholder="Puesto" class="inputPuesto">
-                            <input type="date" placeholder="Fecha finalizacion" class="fechaFinalizacionExperienciaLaboral">
+                    <a class="añadirExperienciaLaboral" onclick="añadirExperiencia()"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
+                    <div id="divContenedorExperienciaLaboral">
+                        <div class="divExperienciaLaboral">
+                            <div class="cabeceraExperienciaLaboral">
+                                <input type="text" name="inputEmpresa1" placeholder="Empresa" class="inputEmpresa">
+                                <input type="text" name="inputPuesto1" placeholder="Puesto" class="inputPuesto">
+                                <input type="date" name="fechaFinalizacionExperienciaLaboral1" placeholder="Fecha finalizacion" class="fechaFinalizacionExperienciaLaboral">
+                            </div>
+                            <div  class="divDescripcionExperienciaLaboral">                            
+                                <textarea name="descripcionExperienciaLaboral1" class="descripcionExperienciaLaboral" placeholder="Descripcion"></textarea>
+                            </div>
+                            <a class="btnEliminarElemento" onclick="eliminarElemento(this)"><i class="fa fa-minus-square fa-2x" aria-hidden="true"></i></a>
                         </div>
-                        <div class="divDescripcionExperienciaLaboral">                            
-                            <textarea class="descripcionExperienciaLaboral" placeholder="Descripcion"></textarea>
-                        </div>
-                    </div>
-                    <a class="añadirExperienciaLaboral"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
+                    </div>                    
+                    <a class="añadirExperienciaLaboral" onclick="añadirExperiencia()"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
                 </div>
 
                 <div id="divHabilidades">
