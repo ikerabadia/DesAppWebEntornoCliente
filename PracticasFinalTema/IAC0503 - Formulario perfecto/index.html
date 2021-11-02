@@ -3,10 +3,11 @@
     <title>IkerAbadia - Formulario perfecto</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <meta charset="ISO-8859-1">
   </head>
 
   <body>
-    <form id="formularioGeneral">
+    <form id="formularioGeneral" action="">
         
         <div id="cabecera">
             <h1 id="tituloPrincipal">Curriculum Vitae - Formulario Perfecto</h1>
@@ -14,50 +15,60 @@
         <div id="contenido">
             <div id="divDatosPersonales">
                 <div id="imagenDatosPersonales">
-
+                    <div id="images"><p id="parrafoImagen">Arrastre aqui su imagen</p></div>
+                    <input type="file" id="inputImagen" hidden>
                 </div>
                 <div id="camposDatosPersonales">
                     <div class="filaDatosPersonales">
                         <div id="divNombre" class="divInputDatosPersonales">
                             <i class="fa fa-user fa-2x" aria-hidden="true"></i>
-                            <input type="text" class="inputDatosPersonales" id="inputNombre" placeholder="Nombre">
+                            <input type="text" class="inputDatosPersonales" id="inputNombre" onkeypress="compruebaCaracterNombre(event)" onblur="compruebaNombre(this)" placeholder="Nombre">
+                            <small class="mensajeError">rellene el campo</small>
                         </div>
-                        <div id="divApellido1" class="divInputDatosPersonales">
+                        <div id="divApellido1" class="divInputDatosPersonales">                            
                             <i class="fa fa-user fa-2x" aria-hidden="true"></i>
-                            <input type="text" class="inputDatosPersonales" id="inputApellido1" placeholder="apellido1">
+                            <input type="text" class="inputDatosPersonales" id="inputApellido1" onkeypress="compruebaCaracterNombre(event)" onblur="compruebaNombre(this)" placeholder="apellido1">
+                            <small class="mensajeError">rellene el campo</small>
                         </div>
                         <div id="divApellido2" class="divInputDatosPersonales">
                             <i class="fa fa-user fa-2x" aria-hidden="true"></i>
-                            <input type="text" class="inputDatosPersonales" id="inputApellido2" placeholder="apellido2">
+                            <input type="text" class="inputDatosPersonales" id="inputApellido2" onkeypress="compruebaCaracterNombre(event)" onblur="compruebaNombre(this)" placeholder="apellido2">
+                            <small class="mensajeError">rellene el campo</small>
                         </div>    
                     </div>                       
                     <div class="filaDatosPersonales">
                         <div id="divEdad" class="divInputDatosPersonales">
                             <i class="fa fa-address-card-o fa-2x" aria-hidden="true"></i>
-                            <input type="number" class="inputDatosPersonales" id="inputEdad" placeholder="Edad">
+                            <input type="number" class="inputDatosPersonales" id="inputEdad" min="0" max="99" onkeypress="compruebaCaracterEdad(event, this)" onblur="compruebaEdad(this)" placeholder="Edad">
+                            <small class="mensajeError">rellene el campo</small>
                         </div> 
                         <div id="divDireccion" class="divInputDatosPersonales">
                             <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-                            <input type="text" class="inputDatosPersonales" id="inputDireccion" placeholder="Direccion">
+                            <input type="text" class="inputDatosPersonales" id="inputDireccion" placeholder="Direccion" onkeypress="compruebaCaracterDireccion(event, this)" onblur="compruebaDireccion(this)" >
+                            <small class="mensajeError">la cadena introducida no es una direccion</small>
                         </div>  
                         <div id="divMail" class="divInputDatosPersonales">
                             <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
-                            <input type="email" class="inputDatosPersonales" id="inputMail" placeholder="Email">
+                            <input type="email" class="inputDatosPersonales" id="inputMail" placeholder="Email" onblur="compruebaEmail(this)">
+                            <small class="mensajeError">la cadena introducida no es una direccion de email</small>
                         </div>
                                                  
                     </div> 
                     <div class="filaDatosPersonales">
                         <div id="divTelefono" class="divInputDatosPersonales">
                             <i class="fa fa-phone fa-2x" aria-hidden="true"></i>
-                            <input type="tel" class="inputDatosPersonales" id="inputTelefono" placeholder="Telefono">
+                            <input type="tel" class="inputDatosPersonales" id="inputTelefono" placeholder="Telefono" onkeypress="compruebaCaracterTelefono(event, this)" onblur="compruebaTelefono(this)">
+                            <small class="mensajeError">El telefono debe tener 9 digitos</small>
                         </div> 
                         <div id="divLinked" class="divInputDatosPersonales">
                             <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
-                            <input type="text" class="inputDatosPersonales" id="inputLinked" placeholder="LinkedIn">
+                            <input type="text" class="inputDatosPersonales" id="inputLinked" placeholder="LinkedIn" onblur="compruebaLink(this)">
+                            <small class="mensajeError">La cadena introducida no es un link</small>
                         </div> 
                         <div id="divGithub" class="divInputDatosPersonales">
                             <i class="fa fa-github-square fa-2x" aria-hidden="true"></i>
-                            <input type="text" class="inputDatosPersonales" id="inputGithub" placeholder="Github">
+                            <input type="text" class="inputDatosPersonales" id="inputGithub" placeholder="Github" onblur="compruebaLink(this)">
+                            <small class="mensajeError">La cadena introducida no es un link</small>
                         </div>                                                  
                     </div> 
                 </div>                
@@ -72,9 +83,34 @@
                     <a class="btnAñadirEstudios" onclick="añadirEstudios()"><i class="fa fa-plus-square fa-2x" aria-hidden="true"></i></a>
                     <div id="divContenedorEstudios">
                         <div class="divEstudio">
-                            <input type="text" name="tituloEstudios1" class="tituloEstudios" placeholder="titulo">
-                            <input type="date" name="fechaFinalizacionEstudios1" class="fechaFinalizacionEstudios" placeholder="Fecha Finalizacion">
-                            <input type="text" name="centroEstudios1" class="centroEstudios" placeholder="Centro">
+                            <input list="datalistTitulos" name="tituloEstudios1" class="tituloEstudios" placeholder="titulo" onkeypress="compruebaCaracterAlfanumerico(event)" onblur="compruebaCadenaAlfanumerica(this)">
+                            <small class="mensajeError">rellene el campo</small>
+                            <datalist id="datalistTitulos">
+                                <option value="Bachiller en Informática">
+                                <option value="Tecnico en Computacion">
+                                <option value="Técnico en Informática">
+                                <option value="Perito auxiliar en Informática">
+                                <option value="Diseñador multimedial">
+                                <option value="Diseño y Programación de Videojuegos">
+                                <option value="Técnico en Análisis, Desarrollo y Programación de Aplicaciones">
+                                <option value="Técnico en Informática empresarial">
+                                <option value="Técnico en Seguridad Informática">
+                                <option value="Técnico en Programación y Administración de Redes">
+                                <option value="Técnico Superior en Robótica">
+                                <option value="Técnico Superior en Soporte de Infraestructura de Tecnología de la Información">
+                                <option value="Técnico Universitario en Desarrollo Web   ">
+                                <option value="Técnico Universitario en Software Libre">
+                                <option value="Profesor en Informática">
+                                <option value="Profesor en Ciencias de la Computación">
+                                <option value="Analista de Sistemas">
+                                <option value="Analista Programador">
+                                <option value="Ingeniería en Sistemas Informáticos">
+                                <option value="Ingeniería en Software">
+                              </datalist>
+                            <input type="text" name="fechaFinalizacionEstudios1" class="fechaFinalizacionEstudios" onfocus="setTipoFecha(this)" onblur="compruebaFecha(this)" placeholder="Fecha Finalizacion">
+                            <small class="mensajeError">rellene el campo</small>
+                            <input type="text" name="centroEstudios1" class="centroEstudios" placeholder="Centro" onkeypress="compruebaCaracterAlfanumerico(event)" onblur="compruebaCadenaAlfanumerica(this)">
+                            <small class="mensajeError">rellene el campo</small>
                             <a class="btnEliminarElemento" onclick="eliminarElemento(this)"><i class="fa fa-minus-square fa-2x" aria-hidden="true"></i></a>
                         </div>                        
                     </div>                    
@@ -90,9 +126,12 @@
                     <div id="divContenedorExperienciaLaboral">
                         <div class="divExperienciaLaboral">
                             <div class="cabeceraExperienciaLaboral">
-                                <input type="text" name="inputEmpresa1" placeholder="Empresa" class="inputEmpresa">
-                                <input type="text" name="inputPuesto1" placeholder="Puesto" class="inputPuesto">
-                                <input type="date" name="fechaFinalizacionExperienciaLaboral1" placeholder="Fecha finalizacion" class="fechaFinalizacionExperienciaLaboral">
+                                <input type="text" name="inputEmpresa1" placeholder="Empresa" class="inputEmpresa" onkeypress="compruebaCaracterAlfanumerico(event)" onblur="compruebaCadenaAlfanumerica(this)">
+                                <small class="mensajeError">rellene el campo</small>
+                                <input type="text" name="inputPuesto1" placeholder="Puesto" class="inputPuesto" onkeypress="compruebaCaracterAlfanumerico(event)" onblur="compruebaCadenaAlfanumerica(this)">
+                                <small class="mensajeError">rellene el campo</small>
+                                <input type="text" name="fechaFinalizacionExperienciaLaboral1" placeholder="Fecha finalizacion" class="fechaFinalizacionExperienciaLaboral" onfocus="setTipoFecha(this)" onblur="compruebaFecha(this)">
+                                <small class="mensajeError">rellene el campo</small>
                             </div>
                             <div  class="divDescripcionExperienciaLaboral">                            
                                 <textarea name="descripcionExperienciaLaboral1" class="descripcionExperienciaLaboral" placeholder="Descripcion"></textarea>
@@ -105,11 +144,36 @@
 
                 <div id="divHabilidades">
                     <h2>Habilidades</h2>
+                    <div class="divHabilidad">
+                        <label for="habGithub">Github</label>
+                        <input type="range" id="habGithub" class="habilidad" name="habGithub" min="0" max="100" style="border: 3px solid green">
+                    </div>
+                    <div class="divHabilidad">
+                        <label for="habOffice">Office 365</label>
+                        <input type="range" id="habOffice" class="habilidad" name="habOffice" min="0" max="100" style="border: 3px solid green">
+                    </div>
+                    <div class="divHabilidad">
+                        <label for="habHtml">HTML</label>
+                        <input type="range" id="habHtml" class="habilidad" name="habHtml" min="0" max="100" style="border: 3px solid green">
+                    </div>
+                    <div class="divHabilidad">
+                        <label for="habCss">CSS</label>
+                        <input type="range" id="habCss" class="habilidad" name="habCss" min="0" max="100" style="border: 3px solid green">
+                    </div>
+                    <div class="divHabilidad">
+                        <label for="habJavascript">Javascript</label>
+                        <input type="range" id="habJavascript" class="habilidad" name="habJavascript" min="0" max="100" style="border: 3px solid green">
+                    </div>
+                    <div class="divHabilidad">
+                        <label for="habPhp">PHP</label>
+                        <input type="range" id="habPhp" class="habilidad" name="habPhp" min="0" max="100" style="border: 3px solid green">
+                    </div>
                 </div>
 
             </div>
             <div id="divBotonEnviar">
-                <input style="border-radius: 30px;" type="submit" value="Submit">
+                <input style="border-radius: 30px;" type="submit" value="Submit" onclick="enviarFormulario(event)">
+                <small class="mensajeError" id="mensajeErrorSubmit">Algun campo es incorrecto o esta vacio</small>
             </div>
         </div>
         
