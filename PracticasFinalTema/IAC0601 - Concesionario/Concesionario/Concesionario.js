@@ -1,3 +1,4 @@
+
 Concesionario = function() {
     this.clientes = [];
     this.coches = [];
@@ -5,17 +6,18 @@ Concesionario = function() {
 
 Concesionario.prototype.abrir = function(){
     coche1 = new Coche("2007FJH","BMW","X5",214);
-    añadirCoche(coche1);
+    this.anadirCoche(coche1);
     coche2 = new Coche("2314GBH","Audi","TT",250);
-    añadirCoche(coche2);
-    coche3 = new Coche("8475","Chevrolet","Camaro",405);
-    añadirCoche(coche3);
+    this.anadirCoche(coche2);
+    coche3 = new Coche("8475HAT","Chevrolet","Camaro",405);
+    this.anadirCoche(coche3);
 }
 
 Concesionario.prototype.nuevoCliente = function(cliente) {
     this.clientes.push(cliente);
 }
-function añadirCoche(coche){
+
+Concesionario.prototype.anadirCoche = function(coche){
     this.coches.push(coche);
 }
 

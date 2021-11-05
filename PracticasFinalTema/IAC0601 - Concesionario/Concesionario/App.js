@@ -4,7 +4,7 @@ function abrirConcesionarioInterface() {
     concesionario.abrir();
 }
 
-function añadirClienteInterface() {    
+function anadirClienteInterface() {    
     var cliente = new Cliente(prompt("Introduce el DNI del cliente"));
     concesionario.nuevoCliente(cliente);
 }
