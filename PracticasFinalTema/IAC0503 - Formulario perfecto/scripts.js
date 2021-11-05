@@ -1,7 +1,7 @@
 var estudios = 1;
 var experiencia = 1;
 
-function añadirEstudios() {
+function anadirEstudios() {
     var contenedorEstudios = document.getElementById("divContenedorEstudios");
     var div = document.createElement('div');
     estudios++;
@@ -10,7 +10,7 @@ function añadirEstudios() {
     contenedorEstudios.appendChild(div);
 }
 
-function añadirExperiencia() {
+function anadirExperiencia() {
     var contenedorExperienciaLaboral = document.getElementById("divContenedorExperienciaLaboral");
     var div = document.createElement('div');
     experiencia++;
