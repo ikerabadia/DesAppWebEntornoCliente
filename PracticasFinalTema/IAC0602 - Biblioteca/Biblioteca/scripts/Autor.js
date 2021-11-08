@@ -4,4 +4,7 @@ class Autor{
         this.nacionalidad = nacionalidad;
         this.fechaNacimiento = fechaNacimiento;
     }
+    getNombre(){
+        return this.nombre;
+    }
 }

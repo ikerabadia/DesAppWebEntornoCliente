@@ -12,25 +12,30 @@
     <script type="text/javascript" src="scripts/Prestamo.js"></script>
     <script type="text/javascript" src="scripts/Lector.js"></script>
     <script type="text/javascript" src="scripts/Biblioteca.js"></script>
+    <script type="text/javascript" src="scripts/Index.js"></script>
 </head>
 
 <body>
     <div id="divIzquierda">
         <div id="cabecera">
             <div id="divLectorActual">
-                
+                <p>Lector actual:<br>
+                <b id="lectorActual"></b></p>
             </div>
             <div id="divMultar">
-                <a id="btnMultar" onclick="">Multar</a>
+                <a id="btnMultar" onclick="multar()">Multar</a>
             </div>
         </div>
         <div id="divPrestamos">
             <h2>Prestamos del lector actual</h2>
-
+            <div id="contenedorPrestamos">
+                              
+            </div>
         </div>
         <div id="divMultas">
             <h2>Multa activa</h2>
-            
+            <div id="contenedorMultas">
+            </div>            
         </div>
     </div>
     <div id="divDerecha">
@@ -43,7 +48,7 @@
         <div id="divBiblioteca">
             <h2>Biblioteca</h2>
             <div id="divMuestraCopias">
-
+                
             </div>
         </div>
     </div>

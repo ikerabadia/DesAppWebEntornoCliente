@@ -9,6 +9,15 @@ class Copia{
     getId(){
         return this.id;
     }
+    getLibro(){
+        return this.libro;
+    }
+    getNumCopia(){
+        return this.numCopia;
+    }
+    getEstado(){
+        return this.estado;
+    }
 
     setEstado(estado){
         this.estado = estado;

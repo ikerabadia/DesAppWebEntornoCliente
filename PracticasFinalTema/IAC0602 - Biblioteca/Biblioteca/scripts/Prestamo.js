@@ -8,4 +8,7 @@ class Prestamo{
     getCopia(){
         return this.copia;
     }
+    getFFin(){
+        return this.fFin;
+    }
 }
