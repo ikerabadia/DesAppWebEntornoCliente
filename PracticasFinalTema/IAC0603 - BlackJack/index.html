@@ -5,18 +5,33 @@
     <meta charset="UTF-8">
     <title>Biblioteca</title>
     <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="scripts/Multa.js"></script>
-    <script type="text/javascript" src="scripts/Autor.js"></script>
-    <script type="text/javascript" src="scripts/Libro.js"></script>
-    <script type="text/javascript" src="scripts/Copia.js"></script>
-    <script type="text/javascript" src="scripts/Prestamo.js"></script>
-    <script type="text/javascript" src="scripts/Lector.js"></script>
-    <script type="text/javascript" src="scripts/Biblioteca.js"></script>
-    <script type="text/javascript" src="scripts/Index.js"></script>
+    <script type="text/javascript" src="js/Carta.js"></script>    
+    <script type="text/javascript" src="js/Mano.js"></script>
+    <script type="text/javascript" src="js/Mazo.js"></script>
+    <script type="text/javascript" src="js/Jugador.js"></script>
+    <script type="text/javascript" src="js/Mesa.js"></script>
 </head>
 
 <body>
-    
+    <div id="content">
+        <div id="multimedia">
+            <div id="datos">
+                <p id="pJugador" class="pInfo">Jugador: </p>
+                <p id="pBalance" class="pInfo">Balance: </p>
+                <p id="pApuesta" class="pInfo">Apuesta: </p>
+            </div>
+            <div id="botones">
+                <div id="botonesInteraccion">
+                    <a id="btnPedirCarta" class="btnMultimedia" onclick="pedirCarta()">PEDIR CARTA</a>
+                    <a id="btnPlantarse" class="btnMultimedia" onclick="plantarse()">PLANTARSE</a>
+                </div>
+                <a id="btnNuevaPartida" class="btnMultimedia" onclick="nuevaPartida()">NUEVA PARTIDA</a>
+            </div>
+        </div>
+        <div id="tablero">
+
+        </div>
+    </div>
 </body>
 
 </html>
