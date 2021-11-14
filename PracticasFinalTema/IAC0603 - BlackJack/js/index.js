@@ -33,7 +33,8 @@ function pintarPrimerasCartas() {
         var aux = "<div class=\"carta "+carta.getPalo()+" "+getValor(carta)+"\"> </div>";
         manoBanca.innerHTML += aux;
     });
-    manoBanca.innerHTML = "<div class=\"cartaReverso\"></div>";
+    manoBanca.innerHTML += "<div class=\"cartaReverso\"></div>";
+    //Aqui tengo que hacer lo mismo para pintar las cartas de los jugadores
 }
 function getValor(carta){
     switch (carta.getSimbolo()) {

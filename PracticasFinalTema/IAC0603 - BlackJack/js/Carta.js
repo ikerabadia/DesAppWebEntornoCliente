@@ -1,9 +1,4 @@
-const palos = {
-	CORAZONES: "corazones",
-	PICAS: "picas",
-	TREBOLES: "treboles",
-	DIAMANTES: "diamantes"
-}
+
 
 class Carta{
     constructor (simbolo,palo){

@@ -9,7 +9,7 @@ class Mano{
         this.cartas = [];
     }
     agnadeCarta(carta){
-        this.cartas.push();
+        this.cartas.push(carta);
     }
     getNumeroCartas(){
         return this.numCartas;

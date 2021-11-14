@@ -146,46 +146,46 @@ body{
 .treboles{
     background-position-y: calc(var(--heigth) * -2);
 }
-.picas{
+.diamantes{
     background-position-y: calc(var(--heigth) * -3);
 }
 /*SIMBOLO*/
 .uno{
-    background-position-x: calc(var(--width) * -12);
+    background-position-x: calc(var(--width) * -0);
 }
 .dos{
-    background-position-x: calc(var(--width) * -11);
+    background-position-x: calc(var(--width) * -1);
 }
 .tres{
-    background-position-x: calc(var(--width) * -10);
+    background-position-x: calc(var(--width) * -2);
 }
 .cuatro{
-    background-position-x: calc(var(--width) * -9);
+    background-position-x: calc(var(--width) * -3);
 }
 .cinco{
-    background-position-x: calc(var(--width) * -8);
+    background-position-x: calc(var(--width) * -4);
 }
 .seis{
-    background-position-x: calc(var(--width) * -7);
+    background-position-x: calc(var(--width) * -5);
 }
 .siete{
     background-position-x: calc(var(--width) * -6);
 }
 .ocho{
-    background-position-x: calc(var(--width) * -5);
+    background-position-x: calc(var(--width) * -7);
 }
 .nueve{
-    background-position-x: calc(var(--width) * -4);
+    background-position-x: calc(var(--width) * -8);
 }
 .diez{
-    background-position-x: calc(var(--width) * -3);
+    background-position-x: calc(var(--width) * -9);
 }
 .J{
-    background-position-x: calc(var(--width) * -2);
+    background-position-x: calc(var(--width) * -10);
 }
 .Q{
-    background-position-x: calc(var(--width) * -1);
+    background-position-x: calc(var(--width) * -11);
 }
 .K{
-    background-position-x: calc(var(--width) * -0);
+    background-position-x: calc(var(--width) * -12);
 }

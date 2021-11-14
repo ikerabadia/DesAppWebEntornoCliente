@@ -1,3 +1,11 @@
+/* const palos = {
+	CORAZONES: "corazones",
+	PICAS: "picas",
+	TREBOLES: "treboles",
+	DIAMANTES: "diamantes"
+} */
+let palos = ["corazones", "picas", "treboles", "diamantes"];
+
 class Mazo{
     constructor (){
         this.numCartas = 52;
@@ -26,7 +34,7 @@ class Mazo{
     }
 
     barajar(){
-        this.cartas.sort(()=> this.alea - 0.5);
+        this.cartas.sort(()=> Math.random() - 0.5);
     }
     getNumeroCartas(){
         return this.numCartas;
