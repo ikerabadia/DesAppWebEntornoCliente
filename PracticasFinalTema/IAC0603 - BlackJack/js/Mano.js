@@ -14,6 +14,9 @@ class Mano{
     getNumeroCartas(){
         return this.numCartas;
     }
+    getCartas(){
+        return this.cartas;
+    }
     cuentaPuntos(){
         var ases = 0;
         this.cartas.forEach(carta => {

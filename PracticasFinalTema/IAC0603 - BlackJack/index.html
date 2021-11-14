@@ -10,6 +10,7 @@
     <script type="text/javascript" src="js/Mazo.js"></script>
     <script type="text/javascript" src="js/Jugador.js"></script>
     <script type="text/javascript" src="js/Mesa.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 </head>
 
 <body>
@@ -21,17 +22,26 @@
                 <p id="pApuesta" class="pInfo">Apuesta: </p>
             </div>
             <div id="botones">
-                <div id="botonesInteraccion">
-                    <a id="btnPedirCarta" class="btnMultimedia" onclick="pedirCarta()">PEDIR CARTA</a>
-                    <a id="btnPlantarse" class="btnMultimedia" onclick="plantarse()">PLANTARSE</a>
-                </div>
-                <a id="btnNuevaPartida" class="btnMultimedia" onclick="nuevaPartida()">NUEVA PARTIDA</a>
+                <img id="logoBlackJack" src="img/logoBlackJack.png">
+                <a id="btnNuevaPartida" class="btnMultimedia" onclick="empezarPartida()">NUEVA PARTIDA</a>
             </div>
         </div>
         <div id="tablero">
+            <div id="mazo">
 
-        </div>
+            </div>
+            <div id="manoJugador">
+                
+            </div>
+            <div id="manoBanca">
+                
+            </div>
+            <div id="botonesInteraccion">
+                <a id="btnPedirCarta" class="btnMultimedia" onclick="pedirCarta()">PEDIR CARTA</a>
+                <a id="btnPlantarse" class="btnMultimedia" onclick="plantarse()">PLANTARSE</a>
+            </div>
+        </div>        
     </div>
+    
 </body>
-
 </html>
