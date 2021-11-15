@@ -1,11 +1,7 @@
-/* const palos = {
-	CORAZONES: "corazones",
-	PICAS: "picas",
-	TREBOLES: "treboles",
-	DIAMANTES: "diamantes"
-} */
+
 let palos = ["corazones", "picas", "treboles", "diamantes"];
 
+//contiene el numero de cartas, un numero de aleatorizacion, y un array de cartas
 class Mazo{
     constructor (){
         this.numCartas = 52;
@@ -15,6 +11,7 @@ class Mazo{
 
     }
 
+    //Genera un nuevo array de 52 cartas ordenado
     static generarMazo(){
         var cartas = [];
         for (let j = 0; j < 4; j++) {
@@ -33,12 +30,16 @@ class Mazo{
         return cartas;
     }
 
+    //Desordena de forma aleatoria el array de cartas
     barajar(){
         this.cartas.sort(()=> Math.random() - 0.5);
     }
     getNumeroCartas(){
         return this.numCartas;
     }
+
+    //elimina y devuelve la primera carta del array, en el caso de que fuese la ultima del mazo
+    //se genera un nuevo mazo y se baraja.
     daCarta(){
         var carta = this.cartas.splice(0,1)[0];
         if (this.cartas.length == 0) {

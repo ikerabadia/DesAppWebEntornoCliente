@@ -1,3 +1,6 @@
+/*
+*   clase Jugador -> contiene una mano, el balance, apuesta y el nombre del jugador
+*/
 class Jugador{
     constructor() {
         this.mano = new Mano();
@@ -27,13 +30,19 @@ class Jugador{
     getApuesta(){
         return this.apuesta;
     }
+
+    //Recibe una carta y la añade a la mano del jugador
     robarCarta(carta){
         this.mano.agnadeCarta(carta);
     }
+
+    //obtiene el balance y le suma la apuesta multiplicada por 2
     ganarApuesta(){
         this.balance+=(this.apuesta*2)
         this.apuesta = 0;        
     }
+
+    //Establece la apuesta en 0
     perderApuesta(){
         this.apuesta = 0;
     }

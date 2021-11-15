@@ -1,10 +1,8 @@
 var mesa = new Mesa();
 
-
-window.onload = function(){    
-    
-}
-
+/*
+*   pintarDatos -> muestra los datos de nombre de jugador, balance y apuesta
+*/
 function pintarDatos(){
 var pNombre = document.getElementById("pJugador");
 var pBalance = document.getElementById("pBalance");
@@ -14,11 +12,22 @@ pBalance.innerHTML="Balance: "+mesa.getJugador().getBalance()+"€";
 pApuesta.innerHTML="Apuesta: "+mesa.getJugador().getApuesta()+"€";
 }
 
+/*
+*   establecerDatosJugador -> establece los datos del jugador que se han 
+*   recogidos por prompt en otro metodo
+*/
 function establecerDatosJugador(nombre, balance, apuesta) {
     mesa.getJugador().setBalance(balance);
     mesa.getJugador().setNombre(nombre);    
     mesa.getJugador().setApuesta(apuesta);
 }
+
+/*
+*   empezarPartida -> Comienza la partida estableciendo una nueva mesa,
+*   muestra u oculta los botones segun corresponde, pide los datos del 
+*   jugador, pinta los datos con pintarDatos(), y roba y muestra las primeras
+*   cartas de jugador y banca
+*/
 function empezarPartida() {
         mesa = new Mesa();
         document.getElementById("pPerder").style.display = "none";
@@ -36,6 +45,11 @@ function empezarPartida() {
         mesa.robaCarta(mesa.getBanca());
         pintarPrimerasCartas();
 }
+
+/*
+*   pintarPrimerasCartas -> Pinta las cartas de jugador y banca y añade una 
+*   carta boca abajo a la mano de la banca
+*/
 function pintarPrimerasCartas() {
     //pinto las primeras cartas de la banca
     var manoBanca = document.getElementById("manoBanca");
@@ -52,6 +66,10 @@ function pintarPrimerasCartas() {
         manoJugador.innerHTML = aux;
     });
 }
+
+/*
+*   getValor -> Devuelve el valor en texto (no numero) del valor de la carta
+*/
 function getValor(carta){
     switch (carta.getSimbolo()) {
         case 1:
@@ -95,6 +113,10 @@ function getValor(carta){
             break;      
     }
 }
+
+/*
+*   pintarCartasJugador -> Pinta las cartas del jugador en el tablero
+*/
 function pintarCartasJugador(){
     var manoJugador = document.getElementById("manoJugador");
     manoJugador.innerHTML="";
@@ -103,6 +125,10 @@ function pintarCartasJugador(){
         manoJugador.innerHTML += aux;
     });    
 }
+
+/*
+*   pintarCartasBanca -> Pinta las cartas de la banca en el tablero
+*/
 function pintarCartasBanca() {
     var manoBanca = document.getElementById("manoBanca");
     manoBanca.innerHTML="";
@@ -111,6 +137,10 @@ function pintarCartasBanca() {
         manoBanca.innerHTML += aux;
     }); 
 }
+
+/*
+*   pedirCarta -> coje una carta del mazo y se la da al jugador
+*/
 function pedirCarta() {
         mesa.robaCarta(mesa.getJugador());
         pintarCartasJugador();
@@ -119,20 +149,40 @@ function pedirCarta() {
             perder();
         }
 }
+
+/*
+*   plantarse -> inicia el juego de la banca y una vez acaba comprueba el ganador
+*/
 function plantarse(){
         iniciarJuegoBanca();
         comprobarGanador();
 }
+
+/*
+*   perder -> se lanza si el jugador pierde, muestra un mensaje al jugador indicando
+*   su derrota, lanza el metodo alojado en jugador para perder la apuesta, y por ultimo
+*   lanza el metodo de fin de ronda
+*/
 function perder() {
     document.getElementById("pPerder").style.display = "block";
     mesa.getJugador().perderApuesta();
     finRonda();
 }
+
+/*
+*   ganar -> se lanza si el jugador gana la ronda, muestra un mensaje indicando que 
+*   el jugador a ganado, se lanza el metodo de ganarApuesta, y por ultimo el de fin de ronda
+*/
 function ganar() {
     document.getElementById("pGanar").style.display = "block";
     mesa.getJugador().ganarApuesta();
     finRonda();
 }
+
+/*
+*   iniciarJuegoBanca -> inicia el juego de la banca, que cojera cartas hasta tener 17 
+*   puntos o mas o hasta llegar o pasarse de los 21
+*/
 function iniciarJuegoBanca() {
     pintarCartasBanca();
     var puntosBanca = mesa.getBanca().getMano().cuentaPuntos();
@@ -142,6 +192,11 @@ function iniciarJuegoBanca() {
         puntosBanca = mesa.getBanca().getMano().cuentaPuntos();
     }
 }
+
+/*
+*   comprobarGanador -> comprueba el ganador entre la banca y el jugador y segun quien
+*   sea el ganador lanza el metodo ganar o perder
+*/
 function comprobarGanador() {
     var puntosBanca = mesa.getBanca().getMano().cuentaPuntos();
     var puntosJugador = mesa.getJugador().getMano().cuentaPuntos();
@@ -155,6 +210,10 @@ function comprobarGanador() {
         }
     }    
 }
+
+/*
+*   finRonda -> finaliza la ronda y muestra los botones necesarios para seguir con el juego
+*/
 function finRonda() {
     document.getElementById("btnNuevaPartida").style.display = "flex";
     document.getElementById("btnNuevaRonda").style.display = "flex";
@@ -162,6 +221,11 @@ function finRonda() {
     document.getElementById("btnPlantarse").style.display = "none";
     pintarDatos();
 }
+
+/*
+*   nuevaRonda -> inicia una nueva ronda, para lo cual descarta las manos de ambos jugadores
+*   pide una nueva apuesta, muestra los botones requeridos y roba las dos cartas iniciales
+*/
 function nuevaRonda(){
     mesa.getJugador().getMano().descartaTodas();
     mesa.getBanca().getMano().descartaTodas();

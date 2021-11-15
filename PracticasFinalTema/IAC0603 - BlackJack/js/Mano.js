@@ -1,3 +1,6 @@
+/*
+* Clase Mano -> contiene un array de cartas, numero de cartas, tope de puntos en caso de ser la banca y puntos actuales
+*/
 class Mano{
     constructor (){
         this.numCartas = 0;
@@ -5,9 +8,13 @@ class Mano{
         this.cartas = [];
         this.puntos = 0;
     }
+
+    //Vacia el array de las cartas
     descartaTodas(){
         this.cartas = [];
     }
+
+    //Añade la carta recibida al array de cartas
     agnadeCarta(carta){
         this.cartas.push(carta);
     }
@@ -17,6 +24,8 @@ class Mano{
     getCartas(){
         return this.cartas;
     }
+
+    //Cuenta, devuelve y establece los puntos actuales a partir de las cartas del array de cartas
     cuentaPuntos(){
         var ases = 0;
         this.puntos = 0;
@@ -40,6 +49,8 @@ class Mano{
     getPuntos(){
         return this.puntos;
     }
+
+    //Devuelve una cadena con las cartas que se encuentran en el array de cartas
     toString(){
         var aux = "";
         this.cartas.forEach(carta => {
