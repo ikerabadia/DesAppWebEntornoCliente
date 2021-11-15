@@ -6,11 +6,11 @@ class Jugador{
         this.nombre = "";
     }
     setBalance(balance){
-        this.balance = balance;
+        this.balance = Number(balance);
     }
     setApuesta(apuesta){
-        this.balance -= apuesta;
-        this.apuesta = apuesta;
+        this.balance -= Number(apuesta);
+        this.apuesta = Number(apuesta);
     }
     setNombre(nombre){
         this.nombre = nombre;
@@ -23,6 +23,9 @@ class Jugador{
     }
     getMano(){
         return this.mano;
+    }
+    getApuesta(){
+        return this.apuesta;
     }
     robarCarta(carta){
         this.mano.agnadeCarta(carta);

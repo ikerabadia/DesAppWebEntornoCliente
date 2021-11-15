@@ -19,6 +19,7 @@ class Mano{
     }
     cuentaPuntos(){
         var ases = 0;
+        this.puntos = 0;
         this.cartas.forEach(carta => {
             if (carta.getSimbolo() == 1) {
                 ases++;
@@ -34,6 +35,10 @@ class Mano{
                 this.puntos-=10;
             }            
         }
+        return this.puntos;
+    }
+    getPuntos(){
+        return this.puntos;
     }
     toString(){
         var aux = "";

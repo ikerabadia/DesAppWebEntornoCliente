@@ -40,6 +40,11 @@ class Mazo{
         return this.numCartas;
     }
     daCarta(){
-        return this.cartas.splice(0,1)[0];
+        var carta = this.cartas.splice(0,1)[0];
+        if (this.cartas.length == 0) {
+            this.cartas = Mazo.generarMazo();
+            this.barajar();
+        }
+        return carta;
     }
 }

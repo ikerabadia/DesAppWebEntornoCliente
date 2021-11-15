@@ -1,5 +1,4 @@
 var mesa = new Mesa();
-var partidaEmpezada = false;
 
 
 window.onload = function(){    
@@ -9,32 +8,49 @@ window.onload = function(){
 function pintarDatos(){
 var pNombre = document.getElementById("pJugador");
 var pBalance = document.getElementById("pBalance");
-pNombre.innerHTML+=" "+mesa.getJugador().getNombre();
-pBalance.innerHTML+=" "+mesa.getJugador().getBalance()+"€";
+var pApuesta = document.getElementById("pApuesta");
+pNombre.innerHTML="Nombre: "+mesa.getJugador().getNombre();
+pBalance.innerHTML="Balance: "+mesa.getJugador().getBalance()+"€";
+pApuesta.innerHTML="Apuesta: "+mesa.getJugador().getApuesta()+"€";
 }
 
-function establecerDatosJugador(nombre, balance) {
+function establecerDatosJugador(nombre, balance, apuesta) {
     mesa.getJugador().setBalance(balance);
     mesa.getJugador().setNombre(nombre);    
+    mesa.getJugador().setApuesta(apuesta);
 }
 function empezarPartida() {
-    partidaEmpezada = true;
-    var nombreJugador = prompt("Introduzca su nombre");
-    var balance = prompt("Introduzca su balance");
-    establecerDatosJugador(nombreJugador, balance);
-    pintarDatos();
-    mesa.robaCarta(mesa.getJugador());
-    mesa.robaCarta(mesa.getBanca());
-    pintarPrimerasCartas();
+        mesa = new Mesa();
+        document.getElementById("pPerder").style.display = "none";
+        document.getElementById("pGanar").style.display = "none";
+        document.getElementById("btnNuevaRonda").style.display = "none";
+        document.getElementById("btnNuevaPartida").style.display = "none";
+        document.getElementById("btnPedirCarta").style.display = "flex";
+        document.getElementById("btnPlantarse").style.display = "flex";
+        var nombreJugador = prompt("Introduzca su nombre");
+        var balance = prompt("Introduzca su balance");
+        var apuesta = prompt("Introduzca su apuesta");        
+        establecerDatosJugador(nombreJugador, balance, apuesta);        
+        pintarDatos();
+        mesa.robaCarta(mesa.getJugador());
+        mesa.robaCarta(mesa.getBanca());
+        pintarPrimerasCartas();
 }
 function pintarPrimerasCartas() {
+    //pinto las primeras cartas de la banca
     var manoBanca = document.getElementById("manoBanca");
     mesa.getBanca().getMano().getCartas().forEach(carta => {
         var aux = "<div class=\"carta "+carta.getPalo()+" "+getValor(carta)+"\"> </div>";
-        manoBanca.innerHTML += aux;
+        manoBanca.innerHTML = aux;
     });
     manoBanca.innerHTML += "<div class=\"cartaReverso\"></div>";
-    //Aqui tengo que hacer lo mismo para pintar las cartas de los jugadores
+
+    //Pinto las primeras cartas del jugador
+    var manoJugador = document.getElementById("manoJugador");
+    mesa.getJugador().getMano().getCartas().forEach(carta => {
+        var aux = "<div class=\"carta "+carta.getPalo()+" "+getValor(carta)+"\"> </div>";
+        manoJugador.innerHTML = aux;
+    });
 }
 function getValor(carta){
     switch (carta.getSimbolo()) {
@@ -79,17 +95,91 @@ function getValor(carta){
             break;      
     }
 }
-function pintarCartas(){
-    var cartasJugador = mesa.getJugador().getMano().getCartas();
-    var cartasBanca = mesa.getBanca().getMano().getCartas();
+function pintarCartasJugador(){
+    var manoJugador = document.getElementById("manoJugador");
+    manoJugador.innerHTML="";
+    mesa.getJugador().getMano().getCartas().forEach(carta => {
+        var aux = "<div class=\"carta "+carta.getPalo()+" "+getValor(carta)+"\"> </div>";
+        manoJugador.innerHTML += aux;
+    });    
+}
+function pintarCartasBanca() {
+    var manoBanca = document.getElementById("manoBanca");
+    manoBanca.innerHTML="";
+    mesa.getBanca().getMano().getCartas().forEach(carta => {
+        var aux = "<div class=\"carta "+carta.getPalo()+" "+getValor(carta)+"\"> </div>";
+        manoBanca.innerHTML += aux;
+    }); 
 }
 function pedirCarta() {
-    if (partidaEmpezada) {
-        alert("pedir carta");
-    }    
+        mesa.robaCarta(mesa.getJugador());
+        pintarCartasJugador();
+        var puntosJugador = mesa.getJugador().getMano().cuentaPuntos();
+        if (puntosJugador > 21) {
+            perder();
+        }
 }
 function plantarse(){
-    if (partidaEmpezada) {
-        alert("plantarse");
+        iniciarJuegoBanca();
+        comprobarGanador();
+}
+function perder() {
+    document.getElementById("pPerder").style.display = "block";
+    mesa.getJugador().perderApuesta();
+    finRonda();
+}
+function ganar() {
+    document.getElementById("pGanar").style.display = "block";
+    mesa.getJugador().ganarApuesta();
+    finRonda();
+}
+function iniciarJuegoBanca() {
+    pintarCartasBanca();
+    var puntosBanca = mesa.getBanca().getMano().cuentaPuntos();
+    while (puntosBanca < 17) {
+        mesa.robaCarta(mesa.getBanca());
+        pintarCartasBanca();
+        puntosBanca = mesa.getBanca().getMano().cuentaPuntos();
+    }
+}
+function comprobarGanador() {
+    var puntosBanca = mesa.getBanca().getMano().cuentaPuntos();
+    var puntosJugador = mesa.getJugador().getMano().cuentaPuntos();
+    if (puntosBanca > 21) {
+        ganar();
+    }else{
+        if (puntosJugador > puntosBanca) {
+            ganar();
+        }else{
+            perder();
+        }
     }    
+}
+function finRonda() {
+    document.getElementById("btnNuevaPartida").style.display = "flex";
+    document.getElementById("btnNuevaRonda").style.display = "flex";
+    document.getElementById("btnPedirCarta").style.display = "none";
+    document.getElementById("btnPlantarse").style.display = "none";
+    pintarDatos();
+}
+function nuevaRonda(){
+    mesa.getJugador().getMano().descartaTodas();
+    mesa.getBanca().getMano().descartaTodas();
+    var apuesta = prompt("Introduzca su apuesta");
+    mesa.getJugador().setApuesta(apuesta);
+    pintarDatos();
+    document.getElementById("pPerder").style.display = "none";
+    document.getElementById("pGanar").style.display = "none";
+    document.getElementById("btnNuevaRonda").style.display = "none";
+    document.getElementById("btnNuevaPartida").style.display = "none";
+    document.getElementById("btnPedirCarta").style.display = "flex";
+    document.getElementById("btnPlantarse").style.display = "flex";
+    var manoJugador = document.getElementById("manoJugador");
+    manoJugador.innerHTML="";
+    var manoBanca = document.getElementById("manoBanca");
+    manoBanca.innerHTML="";
+    //mesa.nuevoMazo();
+    mesa.robaCarta(mesa.getJugador());
+    mesa.robaCarta(mesa.getBanca());
+    pintarPrimerasCartas();
 }
