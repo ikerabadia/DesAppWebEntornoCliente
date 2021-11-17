@@ -1,0 +1,28 @@
+<html>
+	<head> 
+		<meta charset="UTF-8">	
+		<title>ejercicio1</title>
+		<link rel="stylesheet" href="css/ejercicio1.css" />
+	</head>
+	<body>		
+		<div id="cuerpo">
+			<div id="ttl">
+			</div>
+				  <p>Ejericicio 1: recrea el mítico duelo de la película "La princesa prometida"</p>
+				  <p>Pulsa el botón En guardia! para comenzar el duelo épico. </p>
+				  <p>Pulsa el botón Atacar! para que uno de los dos oponentes (elegido al azar) lance una estocada. </p>
+			 <input type='text' id='action' readonly='true' value='Aquí se muestra quién ataca' size="40" />
+			
+			<div id='status'>
+				<textarea id='p1' class='txt' rows="5"></textarea>		
+				<textarea id='p2' class='txt' rows="5"></textarea>
+				<br/>
+				 <progress class='pbar' id='goodPbar' value="5" max="10"></progress> 
+				 <progress class='pbar' id='enemyPbar' value="5" max="10"></progress> 
+			</div>
+			<input type='button' id='binit' class='Start' value='En guardia!' onclick='initGame()'/>
+			<input type='button' id='bplay' class='play' value='Atacar!' onclick='startGame()'/>
+		</div>
+		<script src="js/ejercicio1.js"></script>
+	</body>
+</html>
