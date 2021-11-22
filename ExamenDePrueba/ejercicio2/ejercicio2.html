@@ -1,0 +1,56 @@
+
+<html>
+	<head>
+		<meta charset="UTF-8">	
+		<title>ejercicio2</title>  
+	</head>
+
+	<body>
+		  <center>FORMULARIO</center>
+		  <form name="f1">
+			<p>
+			  <span id="spERROR"></span>
+			</p>
+			<p>
+			  Nombre: <input type="text" name="nombre" value=""  onblur="comprobarNombre(this.value)">
+			  <span id="spnombre"></span>
+			</p>
+			<p>
+			  Apellidos: <input type="text" name="apellidos" value=""  onblur="comprobarApellidos(this.value)">
+			  <span id="spapellidos"></span>
+			</p>
+			<p>
+			  NIF: <input type="text" name="nif" value="" maxlength="9"  onblur="comprobarDNI(this.value)">
+			  <span id="spnif"></span>
+			</p>
+			<p>
+			  Usuario: <input type="text" maxlength="15" name="usuario" value=""  onblur="comprobarUsuario(this.value)">
+			  <span id="spusuario"></span>
+			</p>
+			<p>
+			  Clave: <input type="text" name="clave" value="" id="clave1" onblur="comprobarClaves()" >
+			  <span id="spclave"></span>
+			</p>
+			<p>
+			  Repetir Clave: <input type="password" name="rep_clave" value="" id="clave2"  onblur="comprobarClaves()">
+			  <span id="sprep_clave"></span>
+			</p>
+			<p>
+			  Fecha de Nacimiento:
+			  <input type="text" name="fn_dia" value="" maxlength="2" size="1" > / 
+			  <input type="text" name="fn_mes" value="" maxlength="2" size="1" > / 
+			  <input type="text" name="fn_ano" value="" maxlength="4" size="3" > (dd/mm/aaaa) 
+			  <span id="spf_nacimiento"></span>
+			</p>
+
+			<br><br>
+			<p>
+			  <input type="submit" value="Enviar" name="enviar">
+			  <br><br>
+			  <input type="reset" value="Limpiar Campos" name="limpiar_campos">
+			</p>
+		  </form>
+		<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+		<script type="text/javascript" src="js/ejercicio2.js"></script>
+	</body>
+</html>

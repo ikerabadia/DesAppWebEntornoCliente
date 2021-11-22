@@ -1,0 +1,28 @@
+#cuerpo{
+	margin: 20px auto;
+}
+	
+#ttl {
+	width:374px;
+	height:195px;
+	background-image: url("../img/imagen.png");
+}
+
+.txt{
+	height:100px;
+	width:200px;
+}
+
+.pbar{
+	width:205px;
+}
+
+.play{
+	align:auto;
+	margin:50px;
+}
+
+#action{
+	border:none;
+	
+}
